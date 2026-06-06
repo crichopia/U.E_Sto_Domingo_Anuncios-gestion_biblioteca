@@ -1,5 +1,5 @@
 # U.E_Sto_Domingo_Anuncios-Gestion_biblioteca
-Lógica de negocio – Portal Escolar
+Pagina web para publicacion de anuncios escolares y gestion de la biblioteca 
 
 1. Roles y accesos
 
