@@ -1,4 +1,4 @@
-# U.E_Sto_Domingo_Anuncios-revicion_de_notas
+# U.E_Sto_Domingo_Anuncios-Gestion_biblioteca
 Lógica de negocio – Portal Escolar
 
 1. Roles y accesos
