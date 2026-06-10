@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>U.E Sto Domingo</title>
+    <link rel="stylesheet" href="views/main_style.css">
+</head>
+<body>
+    <div id="header"></div>
+    <div id="main"></div>
+    <div id="footer"></div>
+    <div id="modalLoginPlaceholder"></div>
+    
+    <script src="controllers/load_element.js"></script>
+    <script src="controllers/modal_controller.js"></script>
+    <script src="controllers/login.js"></script>
+
+    <script>
+        loadElement('header', 'views/header.html');
+        loadElement('main', 'views/workinprogress.html');
+        loadElement('footer', 'views/footer.html');
+        loadElement('modalLoginPlaceholder', 'views/modalLogin.html');
+    </script>
+</body>
+</html>
