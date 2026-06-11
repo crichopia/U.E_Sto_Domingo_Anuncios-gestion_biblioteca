@@ -19,8 +19,9 @@ async function verificarCredenciales(ruta) {
         const datos = await respuesta.json();
         // Comparar los valores del JSON con los inputs
         if (datos.username === usernameInput && datos.password === passwordInput) {
-            document.getElementById('login-error').innerText = '✅ Acceso concedido.';
+            document.getElementById('login-error').innerText = '';
             loadElement('main', 'views/adminDashboard.html');
+            loadElement('header', 'views/headerAdmin.html');
             cerrarModal();
             alert("Bienvenido, sr admin");
 
@@ -31,4 +32,11 @@ async function verificarCredenciales(ruta) {
         console.error(error);
         document.getElementById('login-error').innerText = `❌ Error al leer el archivo: ${error.message}`;
     }
+}
+
+function logout(){
+    loadElement('main', 'views/workinprogress.html');
+    loadElement('header', 'views/header.html');
+    // document.getElementById('login-error').innerText = '';
+    
 }
