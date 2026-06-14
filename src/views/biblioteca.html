@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+        margin:                      0;
+        font-family: Arial, sans-serif;
+        box-sizing:         border-box;
+        }
+        article{
+            width:                 60vw;
+            height:                60vh;
+            background:       #b5e0c8;
+            border: 2px #8abfb7 solid;
+            padding:                 5%;
+            margin-top:              5%;
+            margin-bottom:           5%;
+            border-radius:         20px;
+            display:               flex;
+            flex-direction:      column;
+            justify-content:     center;
+            align-items:         center;
+            @media (max-width: 600px) {
+                width:       80vw;
+                margin-top:    2%;
+                margin-bottom: 2%;
+            }
+        }
+
+        article h2{
+            margin:           0;
+            color:    #223944;
+            margin-bottom: 15px;
+        }
+
+        #booksContainer{
+            display:                flex;
+            flex-direction:       column;
+            border: 2px #658291 dashed;
+            border-radius:          20px;
+            width:                   80%;
+            max-height:              85%;
+            background-color:  #c8f7cd;
+            padding:           10px 20px;
+            overflow-y:           scroll;
+            -ms-overflow-style:     none;    /* IE 10+ */
+            scrollbar-width:         none;       /* Firefox */
+        }
+        #booksContainer::-webkit-scrollbar {
+            display: none;               /* Chrome, Safari, Opera */
+        }
+
+        #search{
+            margin-bottom: 10px;
+        }
+    </style>
+
+</head>
+<body>
+    <article>
+        <h2>Consultar biblioteca</h2>
+        <div id="search">
+            <button>Buscar</button> <input type="text">
+            <label for="año">año</label>
+            <select name="año" id="año">
+                <option value="1">1er grado</option>
+                <option value="2">2do grado</option>
+                <option value="3">3er grado</option>
+                <option value="4">4to grado</option>
+                <option value="5">5to grado</option>
+                <option value="6">6to grado</option>
+                <option value="7">1er año</option>
+                <option value="8">2do año</option>
+                <option value="9">3er año</option>
+                <option value="10">4to año</option>
+                <option value="11">5to año</option>
+                <option value="0">n/a</option>
+            </select>
+            <label for="materia">materia</label>
+            <select name="materia" id="materia">
+                <option value="ninguna">n/a</option>
+                <option value="matematicas">matematicas</option>
+                <option value="biologia">biologia</option>
+                <option value="quimica">quimica</option>
+                <option value="fisica">fisica</option>
+                <option value="educ.fisica">educ.fisica</option>
+                <option value="geografia">geografia</option>
+                <option value="historia">historia</option>
+                <option value="arte">arte y patrimonio</option>
+                <option value="castellano">castellano</option>
+
+                </select>
+        </div>
+        <section id="booksContainer">
+            <div class="bookItem" >
+                <hr>
+                <h3 class="book_title" id="title">titulo</h3>
+                <h4><span id="new_author">autor</span> <span id="año">año</span> <span id="materia">materia</span> <span id="editorial">editorial</span></h4>
+                <h4>estado:<span id="status">disponible</span> numero de copias: <span id="#copias">2</span></h4>
+                <!-- <hr> -->
+            </div>
+            <div class="bookItem" >
+                <hr>
+                <h3 class="book_title" id="title">titulo</h3>
+                <h4><span id="new_author">autor</span> <span id="año">año</span> <span id="materia">materia</span> <span id="editorial">editorial</span></h4>
+                <h4>estado:<span id="status">disponible</span> numero de copias: <span id="#copias">2</span></h4>
+                <!-- <hr> -->
+            </div>
+            <div class="bookItem" >
+                <hr>
+                <h3 class="book_title" id="title">titulo</h3>
+                <h4><span id="new_author">autor</span> <span id="año">año</span> <span id="materia">materia</span> <span id="editorial">editorial</span></h4>
+                <h4>estado:<span id="status">disponible</span> numero de copias: <span id="#copias">2</span></h4>
+                <!-- <hr> -->
+            </div>
+            <div class="bookItem" >
+                <hr>
+                <h3 class="book_title" id="title">titulo</h3>
+                <h4><span id="new_author">autor</span> <span id="año">año</span> <span id="materia">materia</span> <span id="editorial">editorial</span></h4>
+                <h4>estado:<span id="status">disponible</span> numero de copias: <span id="#copias">2</span></h4>
+                <!-- <hr> -->
+            </div>
+
+        </section>
+    </article>
+</body>
+</html>

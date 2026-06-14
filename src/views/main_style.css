@@ -1,17 +1,17 @@
 body{
-    margin: 0;
+    margin:                      0;
     font-family: Arial, sans-serif;
-    box-sizing: border-box;
-    background: #7ce4dc;
+    box-sizing:         border-box;
+    background:          #7ce4dc;
     
 }
 
 #main{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    display:           flex;
+    flex-direction:  column;
+    align-items:     center;
     justify-content: center;
-    min-height: 80vh;
+    min-height:        80vh;
 }
 
 /* modales */
@@ -29,15 +29,16 @@ body{
     z-index:                       1;
 }
 
-.modal {
-    z-index: 2;
-    position: fixed;
-    width: 60vw;
-    max-width: 600px;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+#modal_login {
+    z-index:                        3;
+    position:                   fixed;
+    width:                       60vw;
+    max-width:                  600px;
+    top:                          50%;
+    left:                         50%;
+    transform:  translate(-50%, -50%);
 }
+
 .hidden {
     display: none;
 }

@@ -22,7 +22,8 @@ async function verificarCredenciales(ruta) {
             document.getElementById('login-error').innerText = '';
             loadElement('main', 'views/adminDashboard.html');
             loadElement('header', 'views/headerAdmin.html');
-            cerrarModal();
+            cerrarModal('modal_login');
+            // activateAdminFunctions()
             alert("Bienvenido, sr admin");
 
         } else {
@@ -37,6 +38,7 @@ async function verificarCredenciales(ruta) {
 function logout(){
     loadElement('main', 'views/workinprogress.html');
     loadElement('header', 'views/header.html');
+    // removeAdminFunctions()
     // document.getElementById('login-error').innerText = '';
     
 }

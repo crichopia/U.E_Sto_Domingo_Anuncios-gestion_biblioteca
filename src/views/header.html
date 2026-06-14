@@ -7,71 +7,75 @@
 
     <style>
         body {
-            margin: 0;
+            margin:                      0;
             font-family: Arial, sans-serif;
-            box-sizing: border-box;
-            font-size: 18px;
+            box-sizing:         border-box;
+            font-size:                18px;
             
 
         }
         header {
-            box-sizing: border-box;
+            box-sizing:                                    border-box;
             background: linear-gradient(135deg, #51e070, #009774);
-            width:                       100%; 
-            height:                      15vh;
-            color:                    white;
-            padding-bottom: 15px;
-            padding-left:10px;
-            padding-right:10px;
-            text-align:                center;
-            display:                     grid;
-            place-items:               center;
-            grid-template-columns:1fr 1fr 1fr;
+            width:                                               100%; 
+            color:                                            white;
+            padding-top:                                          5px;
+            padding-bottom:                                       5px;
+            padding-left:                                        10px;
+            padding-right:                                       10px;
+            text-align:                                        center;
+            display:                                             grid;
+            place-items:                                       center;
+            grid-template-columns:                        1fr 1fr 1fr;
             @media (max-width: 600px){
-                font-size:      14px;
-                height:         12vh;
-                padding-bottom: 10px;
-                
+                font-size:                                       14px;
+                padding-top:                                      8px;
+                padding-bottom:                                   8px;
+                gap:                                             10px;
             }
             
         }
-    
+        h1{
+            margin:0px;
+        }
         #logo {
-            width: 50px;
-            height:50px;
-            display:flex;
-            align-items: center;
+            width:             65px;
+            height:            65px;
+            display:           flex;
+            align-items:     center;
             justify-content: center;
-            background-color: white;
-            border-radius: 100%;
+            @media (min-width: 600px){
+                width:         80px;
+                height:        80px;
+            }
         }
 
         #logo_menu{
-            display:grid;
-            place-items: center;
+            display:                  grid;
+            place-items:            center;
             grid-template-columns: 1fr 1fr;
-            gap: 3vw;
+            gap:                       3vw;
         }
 
         #rayas{
-            display: flex;
+            display:          flex;
             flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 5px;
+            align-items:    center;
+            justify-content:center;
+            gap:               5px;
         }
 
         .raya{
-            width :60px;
-            height: 10px;
-            border-radius: 5px;
+            width :                           60px;
+            height:                           10px;
+            border-radius:                     5px;
             background-color: rgb(255, 255, 255);
         }
 
         #rayas:hover{
             .raya{
             
-                background-color: rgb(193, 255, 230);
+                background-color:        rgb(193, 255, 230);
                 box-shadow: 0px 0px 10px rgb(163, 255, 224);
             
             }
@@ -79,14 +83,14 @@
 
         #admin-btn{
             background: linear-gradient(135deg, #51e070, #009774);
-            border: 2px #8abfb7 solid;
-            border-radius: 25px;
-            color: white;
-            padding: 1vh 2vw;
-            font-size: 18px;
-            margin: 0px;
+            border:                               2px #8abfb7 solid;
+            border-radius:                                       25px;
+            color:                                            white;
+            padding:                                          1vh 2vw;
+            font-size:                                           18px;
+            margin:                                               0px;
             @media (max-width: 600px){
-                font-size:      14px;
+                font-size:                                       14px;
             }
         }
 
@@ -101,21 +105,20 @@
     <header>
         <div id="logo_menu">
 
-            <div onclick="alert('work in progress')" id="rayas">
+            <div onclick="abrirModal('modal_menu')" id="rayas">
                 <div class="raya"></div>
                 <div class="raya"></div>
                 <div class="raya"></div>
             </div>
-            <div id="logo"></div>
+            <img id="logo" src="../assets/logo_stoDomingo.png" alt="Logo de la escuela">
         </div>
 
         </div>
 
         <h1>U.E Sto Domingo</h1>
-        <button id="admin-btn" onclick="abrirModal('modal_login')">Acceso <br>administrador</button>
+        <!-- <button id="admin-btn" onclick="abrirModal('modal_login')">Acceso <br>administrador</button> -->
     </header>
 
-    <script src="controllers/modal_controller.js"></script>
 
 </body>
 
