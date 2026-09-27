@@ -208,6 +208,7 @@ require_once __DIR__ . '/../controllers/validarSesionBiblioteca.php';
             border-radius:                25px;
             margin-bottom:                10px;
             padding:                 10px 10px;
+            padding-right: 0px;
             display:                      flex;
             gap:                          10px;
             align-items:                center;
@@ -224,12 +225,16 @@ require_once __DIR__ . '/../controllers/validarSesionBiblioteca.php';
             justify-content:  center;
         }
         .bookItem h3{
-            margin: 10px;
+            margin: 10px 0px;
         }
         .bookItem h4{
             margin-top: 0;
             margin-bottom: 0;
             margin-left: 10px;
+            @media (max-width: 600px){
+                font-size: 15px;
+                margin-left: 0px;
+            }
         }
         #search{
             margin-bottom: 10px;
@@ -264,6 +269,9 @@ require_once __DIR__ . '/../controllers/validarSesionBiblioteca.php';
         place-items: center;
         gap: 5px;
         }
+        .controlled_book.hidden {
+            display: none;
+        }
         .controlled_book a{
             text-decoration: none;
             margin:0;
@@ -271,6 +279,46 @@ require_once __DIR__ . '/../controllers/validarSesionBiblioteca.php';
             @media (max-width: 600px){
                 font-size: 15px;
             }
+        }
+        #search{
+            display:          flex;
+            align-items:      center;
+            justify-content:  center;
+            margin-bottom: 10px;
+            flex-wrap:nowrap;
+            gap: 10px;
+        }
+        #search input{
+            padding: 4px 15px;
+            border-radius: 20px;
+            border: none;
+            font-size: 16px;
+            width: 65%;
+            @media (max-width: 600px){
+                width: 65%;
+                font-size: 12px;
+                padding: 4px 5px;
+            }
+
+        }
+        #search button{
+            text-align:          center;
+            margin-bottom:         10px;
+            background-color: #87cead;
+            border-radius:         20px;
+            padding:                5px 10px;
+            border:                none;
+            color:               #fff;
+            cursor:pointer;
+            height: 100%;
+            font-size: 16px;
+            transition:all 0.3s ease;
+            @media (max-width: 600px){
+                font-size: 12px;
+            }
+        }
+        #search button:hover{
+            background-color: #009774;
         }
 
 </style>
@@ -336,18 +384,24 @@ require_once __DIR__ . '/../controllers/validarSesionBiblioteca.php';
                 <input type="text" name="img_url" placeholder="URL de la portada">
 
 
-                <input id="botonSubmit" type="submit" name="save_announcement" value="Registrar aviso" >
+                <input id="botonSubmit" type="submit" name="save_book" value="Registrar libro" >
 
             </form>
         </div>
             <section id="books_container">
+        <div id="search">
+            <input type="text" id="searchInput" placeholder="Buscar por título">
+            <button onclick="filtrarPorTitulo('searchInput', '.controlled_book', '.book_title')">Buscar</button>
+
+        </div>
+
             <?php
                 $query = "SELECT * FROM books ORDER BY id DESC";
                 $result_tasks  = mysqli_query($conn, $query);
 
                 while($row = mysqli_fetch_array($result_tasks)){?>
             <div class="controlled_book">
-                <a href="/U.E_Sto_Domingo_Anuncios-gestion_biblioteca/controllers/crud_news.php?delId=<?php echo $row['id']; ?>">🗑️</a>
+                <a href="/U.E_Sto_Domingo_Anuncios-gestion_biblioteca/controllers/crud_books.php?delId=<?php echo (int) $row['id']; ?>">🗑️</a>
                 <div class="bookItem" >
                     <img src="<?php echo $row['img_url']; ?>" alt="portada del libro">
                     <div>

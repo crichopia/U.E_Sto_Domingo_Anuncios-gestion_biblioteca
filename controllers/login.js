@@ -1,3 +1,4 @@
+//! ESTO ESTA OBSOLETO
 // Función que recibe una ruta, lee el JSON y compara con los inputs
 async function verificarCredenciales(ruta) {
     // Obtener valores de los inputs

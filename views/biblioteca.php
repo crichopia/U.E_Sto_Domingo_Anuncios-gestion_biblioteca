@@ -19,7 +19,7 @@
             height:                70vh;
             background:       #b5e0c8;
             border: 2px #8abfb7 solid;
-            padding:                 10% 5%;
+            padding:                 5% 5%;
             margin-top:              5%;
             margin-bottom:           5%;
             border-radius:         20px;
@@ -44,6 +44,7 @@
             display:                grid;
             grid-template-columns: 1fr 1fr;
             gap: 5px;
+            width: 90%;
 
             border: 2px #658291 dashed;
             border-radius:          20px;
@@ -80,8 +81,11 @@
             color:                   #223944;
 
         }
+        .bookItem.hidden {
+            display: none;
+        }
         .bookItem img{
-            width:             120px;
+            width:             110px;
             height:            150px;
             border-radius:      10px;
             background-color: #fff;
@@ -198,14 +202,14 @@
         </div>
         <div id="search">
             <input type="text" id="searchInput" placeholder="Buscar por título">
-            <button>Buscar</button>
+            <button onclick="filtrarPorTitulo('searchInput', '.bookItem', '.book_title')">Buscar</button>
 
         </div>
 
         <div id="filters">
             <label for="año">Año:</label>
-            <select name="año" id="año">
-                <option value="todos">todos</option>
+            <select name="año" id="year" onchange="filtrarLibros()">
+                <option value="">todos</option>
                 <option value="1er grado">1er grado</option>
                 <option value="2do grado">2do grado</option>
                 <option value="3er grado">3er grado</option>
@@ -221,8 +225,8 @@
             </select>
 
             <label for="materia">Materia:</label>
-            <select name="materia" id="materia">
-                <option value="todos">todos</option>
+            <select name="materia" id="materia" onchange="filtrarLibros()">
+                <option value="">todos</option>
                 <option value="ninguna">n/a</option>
                 <option value="matematicas">matematicas</option>
                 <option value="biologia">biologia</option>
@@ -236,7 +240,7 @@
             </select>
         </div>
         <section id="booksContainer">
-            <div class="bookItem" >
+            <!-- <div class="bookItem" >
                 <img src="" alt="portada del libro">
                 <div>
                     <h3 class="book_title">El Cardenalito</h3>
@@ -246,13 +250,13 @@
                     <h4>estado:<span></span></h4>
                     <h4> numero de copias: <span>2</span></h4>
                 </div>
-            </div>
+            </div> -->
             <?php
                 $query = "SELECT * FROM books ORDER BY id DESC";
                 $result_tasks  = mysqli_query($conn, $query);
 
                 while($row = mysqli_fetch_array($result_tasks)){?>
-            <div class="bookItem" >
+            <div class="bookItem" data-year="<?php echo htmlspecialchars($row['year'], ENT_QUOTES, 'UTF-8'); ?>" data-materia="<?php echo htmlspecialchars($row['materia'], ENT_QUOTES, 'UTF-8'); ?>">
                 <img src="<?php echo $row['img_url']; ?>" alt="portada del libro">
                 <div>
                     <h3 class="book_title"><?php echo $row['title']; ?></h3>

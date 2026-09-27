@@ -7,9 +7,6 @@
     <div id="modalLoginPlaceholder"></div>
     
 
-    <script src="../controllers/load_element.js"></script>
-    <script src="../controllers/modal_controller.js"></script>
-    <script src="../controllers/login.js"></script>
 
     <script>
         loadElement('header', '../views/headerAdmin.php');

@@ -128,8 +128,11 @@
             margin-bottom:                10px;
             padding:                 10px 10px;
         }
-/* para las noticias */
 
+        .news_ite .hidden{
+            display: none;
+        }
+        
         .normal{
                 background-color:        #b3e7d7;
             }
@@ -175,8 +178,8 @@
         <div id="news_box">
             <nav id="filters">
                 <!-- <hr> -->
-                <label for="materia">Filtrar</label>
-                <select name="importance" id="materia" >
+                <label for="importance">Filtrar</label>
+                <select name="importance" id="importance" onchange="filtrarNoticias()">
                     <option value="">n/a</option>
                     <option value="normal">normal</option>
                     <option value="importante">importante</option>
