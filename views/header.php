@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        body {
+            margin:                      0;
+            font-family: Arial, sans-serif;
+            box-sizing:         border-box;
+            font-size:                18px;
+            
+
+        }
+        header {
+            box-sizing:                                    border-box;
+            background: linear-gradient(135deg, #51e070, #009774);
+            width:                                               100%; 
+            color:                                            white;
+            padding-top:                                          5px;
+            padding-bottom:                                       5px;
+            padding-left:                                        10px;
+            padding-right:                                       10px;
+            text-align:                                        center;
+            display:                                             grid;
+            place-items:                                       center;
+            grid-template-columns:                        1fr 1fr 1fr;
+            @media (max-width: 600px){
+                font-size:                                       14px;
+                padding-top:                                      8px;
+                padding-bottom:                                   8px;
+                gap:                                             10px;
+            }
+            
+        }
+        h1{
+            margin:0px;
+        }
+        #logo {
+            width:             65px;
+            height:            65px;
+            display:           flex;
+            align-items:     center;
+            justify-content: center;
+            @media (min-width: 600px){
+                width:         80px;
+                height:        80px;
+            }
+        }
+
+        #logo_menu{
+            display:                  grid;
+            place-items:            center;
+            grid-template-columns: 1fr 1fr;
+            gap:                       3vw;
+        }
+
+        #rayas{
+            display:          flex;
+            flex-direction: column;
+            align-items:    center;
+            justify-content:center;
+            gap:               5px;
+        }
+
+        .raya{
+            width :                           60px;
+            height:                           10px;
+            border-radius:                     5px;
+            background-color: rgb(255, 255, 255);
+            @media (max-width: 600px){
+                width:         45px;
+                height:        8px;
+            }
+
+        }
+
+        #rayas:hover{
+            .raya{
+            
+                background-color:        rgb(193, 255, 230);
+                box-shadow: 0px 0px 10px rgb(163, 255, 224);
+
+            }
+
+        }
+
+        #admin-btn{
+            background: linear-gradient(135deg, #51e070, #009774);
+            border:                               2px #8abfb7 solid;
+            border-radius:                                       25px;
+            color:                                            white;
+            padding:                                          1vh 2vw;
+            font-size:                                           18px;
+            margin:                                               0px;
+            @media (max-width: 600px){
+                font-size:                                       14px;
+            }
+        }
+
+        #admin-btn:hover{
+            background: linear-gradient(135deg, #36b565, #00807b);
+        }
+    </style>
+
+</head>
+
+<body>
+    <?php session_start(); ?>
+    <header>
+        <div id="logo_menu">
+
+            <div onclick="abrirModal('modal_menu')" id="rayas">
+                <div class="raya"></div>
+                <div class="raya"></div>
+                <div class="raya"></div>
+            </div>
+            <img id="logo" src="assets/logo_stoDomingo.png" alt="Logo de la escuela">
+
+        </div>
+
+        <h1>U.E Sto Domingo</h1>
+        <h2><?php if (isset($_SESSION['username'])) { echo "Bienvenido, " . $_SESSION['username']; } else { echo ""; }
+        ?></h2>
+        <!-- <button id="admin-btn" onclick="abrirModal('modal_login')">Acceso <br>administrador</button> -->
+    </header>
+
+
+</body>
+
+</html>

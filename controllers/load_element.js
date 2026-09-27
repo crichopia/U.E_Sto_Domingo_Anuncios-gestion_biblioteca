@@ -15,3 +15,7 @@ function loadElement(element, elementPath) {
             console.error('No se pudo cargar ' + elementPath + ':', error);
         });
 }
+
+// function redirigir(path){
+//     window.location.replace(path);
+// }

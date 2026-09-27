@@ -1,0 +1,1 @@
+<?php header("Location: dashboards/newsDashboard.php"); ?>

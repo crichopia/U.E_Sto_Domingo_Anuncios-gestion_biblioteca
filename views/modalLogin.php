@@ -113,12 +113,13 @@
 
             <h2>Acceso administrador</h2>
 
-            <form id="login-form">
-                <input type="text" id="usernameInput" placeholder="Usuario" required>
-                <input type="password" id="passwordInput" placeholder="Contraseña" required>
+            <form id="login-form" action="/U.E_Sto_Domingo_Anuncios-gestion_biblioteca/controllers/login.php" method="POST">
+                <input type="text"     name="username" class="form-imput" id="usernameInput" placeholder="Usuario" autofocus required>
+                <input type="password" name="password" class="form-imput" id="passwordInput" placeholder="Contraseña" required>
+                <button type="submit" name="login" id="loginButton">Ingresar</button>
             </form>
 
-            <button onclick="verificarCredenciales('config/adminConfig.json')" id="loginButton">Ingresar</button>
+            <!-- <button onclick="verificarCredenciales('/U.E_Sto_Domingo_Anuncios-gestion_biblioteca/config/adminConfig.json')" id="loginButton">Ingresar</button> -->
             
             <p>*usuario y contraseña de prueba:<br>admin / 123456</p>
             <p id="login-error" style="color: red;"></p>
@@ -126,6 +127,10 @@
 
         </div>
     </div>
+    <script>
+        document.getElementById('usernameInput').value = '';
+        document.getElementById('passwordInput').value = '';
+    </script>
     <script src="controllers/login.js"></script>
     <script src="controllers/login.js"></script>
 

@@ -39,7 +39,8 @@
             gap:               20px;
         }
         .btnMenu{
-            width:           65% ;
+            width:            65%;
+            max-width:       65% ;
             border:          none;
             border-radius:   25px;
             background: #009774;
@@ -54,6 +55,7 @@
                 padding: 5px 10px;
             }
         }
+
         #btn_cerrar_menu{
             box-sizing: border-box;
             border:           none;
@@ -83,24 +85,43 @@
             margin:                                 8px 0;
         }
 
+        #bntNuevoUsuario{
+            text-decoration:  none;
+            display:          flex;
+            flex-direction: column;
+            align-items:    center;
+            justify-content:center;
+        }
     </style>
 </head>
 
 <body>
+    <?php session_start(); ?>
+
     <div class="modal hidden" id="modal_menu">
         <div id="modalMenu_container">
             <div id="modalMenu_content">
                 <button id="btn_cerrar_menu" onclick="cerrarModal('modal_menu')">x</button>
                 <h2>- Menu -</h2>
                 <hr>
-                <button class="btnMenu" id="btn_anuncios" onclick="cerrarModal('modal_menu'),loadElement('main', 'views/newsDashboard.html');">Anuncios</button>
-                <button class="btnMenu" id="btn_biblioteca" onclick="cerrarModal('modal_menu'),loadElement('main', 'views/biblioteca.html');">Biblioteca</button>
-                <button class="btnMenu" id="btn_recomendaciones" onclick="cerrarModal('modal_menu'),loadElement('main', 'views/workinprogress.html');">Recomendaciones de <br>los profesores</button>
-                <button class="btnMenu" id="admin-btn" onclick="cerrarModal('modal_menu'),abrirModal('modal_login') ">Acceso <br>administrador</button>
+                <button class="btnMenu"  onclick="cerrarModal('modal_menu'),loadElement('main', '/U.E_Sto_Domingo_Anuncios-gestion_biblioteca/views/newsDashboard.php');">Anuncios</button>
+                <button class="btnMenu" onclick="window.location.href='/U.E_Sto_Domingo_Anuncios-gestion_biblioteca/adminDashboards/bibliotecaDashboard.php'">Biblioteca</button>
+
+                <button class="btnMenu"  onclick="cerrarModal('modal_menu'),loadElement('main', '/U.E_Sto_Domingo_Anuncios-gestion_biblioteca/views/workinprogress.php');">Recomendaciones de <br>los profesores</button>
+                <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin') { ?>
+                    <button class="btnMenu" onclick="window.location.href='/U.E_Sto_Domingo_Anuncios-gestion_biblioteca/adminDashboards/registerDashboard.php'">Añadir nuevo <br>usuario</button>
+                <?php } ?>
+
+                <?php
+                if (isset($_SESSION['username'])) {?>
+                    <button class="btnMenu" id="admin-btn" onclick="window.location.href='/U.E_Sto_Domingo_Anuncios-gestion_biblioteca/controllers/logout.php'">Cerrar sesión</button>
+                <?php } else {?>
+                    <button class="btnMenu" id="admin-btn" onclick="cerrarModal('modal_menu'),abrirModal('modal_login') ">Acceso <br>administrador</button>
+                <?php } ?>
             </div>
         </div>
     </div>
-<script src="controllers/login.js"></script>
+<script src="/U.E_Sto_Domingo_Anuncios-gestion_biblioteca/public/controllers/login.js"></script>
 
 </body>
 </html>
