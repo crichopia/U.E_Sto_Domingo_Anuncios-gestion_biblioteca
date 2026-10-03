@@ -122,3 +122,21 @@ function prestarLibro(inputTitle, inputId, bookTitle, bookId){
     titleInput.value = bookTitle;
     idInput.value = bookId;
 }
+function eliminarLibroDelPrestamo(inputTitle, inputId){
+    const titleInput = document.getElementById(inputTitle);
+    const idInput = document.getElementById(inputId);
+
+    if (!titleInput || !idInput) {
+        console.warn('No se encontraron los inputs para el título o el ID del libro');
+        return;
+    }
+    titleInput.value = '';
+    idInput.value = '';
+}
+
+function cambiarBotonPrestamo(idAniadir, idEliminar) {
+    const botonAniadir = document.getElementById(idAniadir);
+    const botonEliminar = document.getElementById(idEliminar);
+    botonAniadir.classList.toggle('hidden');
+    botonEliminar.classList.toggle('hidden');
+}

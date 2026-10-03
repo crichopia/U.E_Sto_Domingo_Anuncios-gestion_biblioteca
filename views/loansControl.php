@@ -143,6 +143,9 @@ require_once __DIR__ . '/../controllers/validarSesionBiblioteca.php';
         .controlarLibro:hover {
             background-color: #009774;
         }
+        .controlarLibro.hidden {
+            display: none;
+        }
 
         #books_container {
             display: flex;
@@ -347,7 +350,7 @@ require_once __DIR__ . '/../controllers/validarSesionBiblioteca.php';
 
         <div id="newsControlContainer">
         <div id="formContainer">    
-        <form action="../controllers/crud_books.php" method="post">
+        <form action="../controllers/crud_loans.php" method="post">
 
                 <h3>Nombre estudiante:</h3>
                 <input type="text" name="nombreE" autofocus required=true placeholder="Nombre del estudiante">
@@ -361,10 +364,11 @@ require_once __DIR__ . '/../controllers/validarSesionBiblioteca.php';
                 <h3>Libro</h3>
                 <div style=" display: flex; gap: 5px; align-items: center;">
                 <input id="book_name" type="text" name="book_name" placeholder="nombre del libro" readonly required style=" width: 80%;">
-                <button class="controlarLibro" type="button" onclick="abrirModal('modal_libros')"><i class="fa-solid fa-plus"></i></button>
+                <button id="boton_Aniadir" class="controlarLibro" type="button" onclick="abrirModal('modal_libros')"><i class="fa-solid fa-plus"></i></button>
+                <button id="boton_Eliminar" class="controlarLibro hidden" type="button" onclick="eliminarLibroDelPrestamo('book_name', 'book_id'); cambiarBotonPrestamo('boton_Aniadir', 'boton_Eliminar');"><i class="fa-solid fa-minus"></i></button>
                 </div>
                 <input id="book_id" class="hidden" type="text" name="book_id" readonly >
-                <input id="botonSubmit" type="submit" name="save_book" value="Registrar libro" >
+                <input id="botonSubmit" type="submit" name="save_loan" value="Registrar libro" >
 
             </form>
         </div>
@@ -379,7 +383,7 @@ require_once __DIR__ . '/../controllers/validarSesionBiblioteca.php';
                         <div style="display: flex; gap: 5px; align-items: baseline;">
                             <h3 class="loanData"><?php echo $row['student_name']; ?> </span></h3>
                             <h4><?php echo $row['loan_date']; ?></h4>
-                            <a class="iconLink" href="/U.E_Sto_Domingo_Anuncios-gestion_biblioteca/controllers/crud_books.php?delId=<?php echo (int) $row['id']; ?>"><i class="fa-solid fa-trash"></i></a>
+                            <a class="iconLink" href="/U.E_Sto_Domingo_Anuncios-gestion_biblioteca/controllers/crud_loans.php?delId=<?php echo (int) $row['id']; ?>"><i class="fa-solid fa-trash"></i></a>
                         </div>
                         <hr>
                         <div>
@@ -416,14 +420,15 @@ require_once __DIR__ . '/../controllers/validarSesionBiblioteca.php';
                 <div class="controlled_book">
                 <div class="bookItem" id="<?php echo $row['id']; ?>" data-year="<?php echo htmlspecialchars($row['year'], ENT_QUOTES, 'UTF-8'); ?>" data-materia="<?php echo htmlspecialchars($row['materia'], ENT_QUOTES, 'UTF-8'); ?>">
                     <img src="<?php echo $row['img_url']; ?>" alt="portada dellibro">
-                    <div style="display: flex; flex-direction: column; gap: 5px;">
+                    <div style="display: flex; width:100%; flex-direction: column; gap: 5px;">
                         <h3 class="book_title"><?php echo $row['title']; ?></h3>
                         <h4>Año: <?php echo $row['year']; ?></h4>
                         <h4>Materia: <?php echo $row['materia']; ?></h4>
+                        <?php if ($row['num_copies'] > 0) { ?>
                         <div class="centerTheDamnButton">
-                            <button class="controlarLibro" type="button" onclick="cerrarModal('modal_libros'); 
-                            prestarLibro('book_name', 'book_id', '<?php echo($row['title']); ?>', <?php echo (int) $row['id']; ?>)"><i class="fa-solid fa-check"></i></button>
+                            <button class="controlarLibro" type="button" onclick="cerrarModal('modal_libros'); prestarLibro('book_name', 'book_id', '<?php echo($row['title']); ?>', <?php echo (int) $row['id']; ?>); cambiarBotonPrestamo('boton_Aniadir', 'boton_Eliminar');"><i class="fa-solid fa-check"></i></button>
                         </div>
+                        <?php } ?>
                     </div>
                 </div>
                 </div>
