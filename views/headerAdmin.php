@@ -176,6 +176,10 @@
             <a href="/U.E_Sto_Domingo_Anuncios-gestion_biblioteca/dashboards/newsDashboard.php">Noticias</a>
             <a href="/U.E_Sto_Domingo_Anuncios-gestion_biblioteca/dashboards/bibliotecaDashboard.php">Biblioteca</a>
             <a href="/U.E_Sto_Domingo_Anuncios-gestion_biblioteca/index.php">Páginas recomendadas</a>
+            <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin' || isset($_SESSION['role']) && $_SESSION['role'] === 'bibliotecario') { ?>
+            <a href="/U.E_Sto_Domingo_Anuncios-gestion_biblioteca/adminDashboards/loansDashboard.php">Libros prestados</a>
+            <?php } ?>
+
             <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin') { ?>
             <a href="/U.E_Sto_Domingo_Anuncios-gestion_biblioteca/adminDashboards/registerDashboard.php">Añadir nuevo usuario</a>
             <?php } ?>

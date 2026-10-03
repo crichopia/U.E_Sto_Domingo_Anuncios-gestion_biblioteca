@@ -109,3 +109,16 @@ function filtrarNoticias(){
         noticia.style.display = coincide ? '' : 'none';
     });
 }
+
+//* añadir libro al prestamo
+function prestarLibro(inputTitle, inputId, bookTitle, bookId){
+    const titleInput = document.getElementById(inputTitle);
+    const idInput = document.getElementById(inputId);
+
+    if (!titleInput || !idInput) {
+        console.warn('No se encontraron los inputs para el título o el ID del libro');
+        return;
+    }
+    titleInput.value = bookTitle;
+    idInput.value = bookId;
+}

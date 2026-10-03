@@ -113,7 +113,7 @@
             justify-content:     center;
             /* height: 5%; */
             gap:             10px;
-            padding:  5px 15px ;
+            padding:  5px 5px ;
             font-weight:             bold;
             color:              #223944;
             font-size:               16px;

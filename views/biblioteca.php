@@ -42,7 +42,7 @@
 
         #booksContainer{
             display:                grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1fr ;
             gap: 5px;
             width: 90%;
 
@@ -54,7 +54,7 @@
             overflow-y:           scroll;
             -ms-overflow-style:     none;    /* IE 10+ */
             scrollbar-width:         none;       /* Firefox */
-            @media (max-width: 970px){
+            @media (max-width: 1200px){
                 grid-template-columns: 1fr;
                 width: 90%;
                 /* height: auto; */
@@ -84,8 +84,15 @@
         .bookItem.hidden {
             display: none;
         }
+        .bookItem.disponible {
+            background-color:        #b3e7d7;
+        }
+        .bookItem.disponiblent {
+            background-color:        #e4a69b;
+        }
+
         .bookItem img{
-            width:             110px;
+            min-width:             110px;
             height:            150px;
             border-radius:      10px;
             background-color: #fff;
@@ -210,6 +217,7 @@
             <label for="año">Año:</label>
             <select name="año" id="year" onchange="filtrarLibros()">
                 <option value="">todos</option>
+                <option value="ninguno">ninguno</option>
                 <option value="1er grado">1er grado</option>
                 <option value="2do grado">2do grado</option>
                 <option value="3er grado">3er grado</option>
@@ -221,13 +229,12 @@
                 <option value="3er año">3er año</option>
                 <option value="4to año">4to año</option>
                 <option value="5to año">5to año</option>
-                <option value="n/a">n/a</option>
             </select>
 
             <label for="materia">Materia:</label>
             <select name="materia" id="materia" onchange="filtrarLibros()">
                 <option value="">todos</option>
-                <option value="ninguna">n/a</option>
+                <option value="ninguna">ninguna</option>
                 <option value="matematicas">matematicas</option>
                 <option value="biologia">biologia</option>
                 <option value="quimica">quimica</option>
@@ -240,34 +247,23 @@
             </select>
         </div>
         <section id="booksContainer">
-            <!-- <div class="bookItem" >
-                <img src="" alt="portada del libro">
-                <div>
-                    <h3 class="book_title">El Cardenalito</h3>
-                    <h4>autor:</h4>
-                    <h4>editorial:</h4>
-                    <h4><span>año:</span> <span>materia:</span></h4>
-                    <h4>estado:<span></span></h4>
-                    <h4> numero de copias: <span>2</span></h4>
-                </div>
-            </div> -->
             <?php
                 $query = "SELECT * FROM books ORDER BY id DESC";
                 $result_tasks  = mysqli_query($conn, $query);
 
                 while($row = mysqli_fetch_array($result_tasks)){?>
-            <div class="bookItem" data-year="<?php echo htmlspecialchars($row['year'], ENT_QUOTES, 'UTF-8'); ?>" data-materia="<?php echo htmlspecialchars($row['materia'], ENT_QUOTES, 'UTF-8'); ?>">
+            <div class="bookItem <?php echo ((int) $row['num_copies'] > 0) ? 'disponible' : 'disponiblent'; ?>" data-year="<?php echo htmlspecialchars($row['year'], ENT_QUOTES, 'UTF-8'); ?>" data-materia="<?php echo htmlspecialchars($row['materia'], ENT_QUOTES, 'UTF-8'); ?>">
                 <img src="<?php echo $row['img_url']; ?>" alt="portada del libro">
                 <div>
                     <h3 class="book_title"><?php echo $row['title']; ?></h3>
 
-                    <!-- <h4>autor: <?php echo $row['author']; ?></h4> -->
+                    <h4>autor: <?php echo $row['author']; ?></h4>
                     <!-- <h4>editorial: <?php echo $row['publisher']; ?></h4> -->
-                    <h4><span>año:</span> <span><?php echo $row['year']; ?></span>
-                    <span>materia:</span> <span><?php echo $row['materia']; ?></span></h4>
+                    <h4>año: <?php echo $row['year']; ?></h4>
+                    <h4>materia: <span><?php echo $row['materia']; ?></span></h4>
                     </h4>
-                    <h4>estado:<span><?php echo $row['status']; ?></span></h4>
                     <h4> numero de copias: <span><?php echo $row['num_copies']; ?></span></h4>
+                    <h4>estado:<span><?php echo ((int) $row['num_copies'] > 0) ? 'disponible' : 'no disponible'; ?></span></h4>
                 </div>
             </div>
             <?php } ?>

@@ -43,3 +43,8 @@ body{
     display: none;
 }
 
+.centerTheDamnButton{
+    display:                             flex;
+    place-items:                       center;
+    justify-content:                   center;
+}
