@@ -200,7 +200,7 @@
 <body>
     <article>
         <div id="titulo">
-            <h2>Consultar biblioteca</h2>
+            <h2>Consultar Biblioteca</h2>
             <?php if (isset($_SESSION['username'])) {?>
                 <?php if ($_SESSION['role'] === 'bibliotecario' or $_SESSION['role'] === 'admin') {?>
                     <button id="addBooks" onclick="window.location.href='/U.E_Sto_Domingo_Anuncios-gestion_biblioteca/adminDashboards/addBooksDashboard.php'">Añadir Libros</button>
@@ -208,7 +208,7 @@
             <?php } ?>
         </div>
         <div id="search">
-            <input type="text" id="searchInput" placeholder="Buscar por título">
+            <input type="text" id="searchInput" placeholder="Buscar por Título">
             <button onclick="filtrarPorTitulo('searchInput', '.bookItem', '.book_title')">Buscar</button>
 
         </div>
@@ -216,34 +216,34 @@
         <div id="filters">
             <label for="año">Año:</label>
             <select name="año" id="year" onchange="filtrarLibros()">
-                <option value="">todos</option>
+                <option value="">Todos</option>
                 <option value="ninguno">ninguno</option>
-                <option value="1er grado">1er grado</option>
-                <option value="2do grado">2do grado</option>
-                <option value="3er grado">3er grado</option>
-                <option value="4to grado">4to grado</option>
-                <option value="5to grado">5to grado</option>
-                <option value="6to grado">6to grado</option>
-                <option value="1er año">1er año</option>
-                <option value="2do año">2do año</option>
-                <option value="3er año">3er año</option>
-                <option value="4to año">4to año</option>
-                <option value="5to año">5to año</option>
+                <option value="1er grado">1er Grado</option>
+                <option value="2do grado">2do Grado</option>
+                <option value="3er grado">3er Grado</option>
+                <option value="4to grado">4to Grado</option>
+                <option value="5to grado">5to Grado</option>
+                <option value="6to grado">6to Grado</option>
+                <option value="1er año">1er Año</option>
+                <option value="2do año">2do Año</option>
+                <option value="3er año">3er Año</option>
+                <option value="4to año">4to Año</option>
+                <option value="5to año">5to Año</option>
             </select>
 
             <label for="materia">Materia:</label>
             <select name="materia" id="materia" onchange="filtrarLibros()">
-                <option value="">todos</option>
-                <option value="ninguna">ninguna</option>
-                <option value="matematicas">matematicas</option>
-                <option value="biologia">biologia</option>
-                <option value="quimica">quimica</option>
-                <option value="fisica">fisica</option>
-                <option value="educ.fisica">educ.fisica</option>
-                <option value="geografia">geografia</option>
-                <option value="historia">historia</option>
-                <option value="arte">arte y patrimonio</option>
-                <option value="castellano">castellano</option>
+                <option value="">Todos</option>
+                <option value="ninguna">Ninguna</option>
+                <option value="matematicas">Matematicas</option>
+                <option value="biologia">Biologia</option>
+                <option value="quimica">Quimica</option>
+                <option value="fisica">Fisica</option>
+                <option value="educ.fisica">Educ.Fisica</option>
+                <option value="geografia">Geografia</option>
+                <option value="historia">Historia</option>
+                <option value="arte">Arte y Patrimonio</option>
+                <option value="castellano">Castellano</option>
             </select>
         </div>
         <section id="booksContainer">
@@ -253,17 +253,17 @@
 
                 while($row = mysqli_fetch_array($result_tasks)){?>
             <div class="bookItem <?php echo ((int) $row['num_copies'] > 0) ? 'disponible' : 'disponiblent'; ?>" data-year="<?php echo htmlspecialchars($row['year'], ENT_QUOTES, 'UTF-8'); ?>" data-materia="<?php echo htmlspecialchars($row['materia'], ENT_QUOTES, 'UTF-8'); ?>">
-                <img src="<?php echo $row['img_url']; ?>" alt="portada del libro">
+                <img src="<?php echo $row['img_url']; ?>" alt="Portada del Libro">
                 <div>
                     <h3 class="book_title"><?php echo $row['title']; ?></h3>
 
-                    <h4>autor: <?php echo $row['author']; ?></h4>
+                    <h4>Autor: <?php echo $row['author']; ?></h4>
                     <!-- <h4>editorial: <?php echo $row['publisher']; ?></h4> -->
-                    <h4>año: <?php echo $row['year']; ?></h4>
-                    <h4>materia: <span><?php echo $row['materia']; ?></span></h4>
+                    <h4>Año: <?php echo $row['year']; ?></h4>
+                    <h4>Materia: <span><?php echo $row['materia']; ?></span></h4>
                     </h4>
-                    <h4> numero de copias: <span><?php echo $row['num_copies']; ?></span></h4>
-                    <h4>estado:<span><?php echo ((int) $row['num_copies'] > 0) ? 'disponible' : 'no disponible'; ?></span></h4>
+                    <h4> Numero de Copias: <span><?php echo $row['num_copies']; ?></span></h4>
+                    <h4>Estado:<span><?php echo ((int) $row['num_copies'] > 0) ? 'disponible' : 'no disponible'; ?></span></h4>
                 </div>
             </div>
             <?php } ?>

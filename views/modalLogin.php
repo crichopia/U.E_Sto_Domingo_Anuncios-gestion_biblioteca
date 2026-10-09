@@ -111,7 +111,7 @@
 
             <button id="cerrar_modal_login" onclick="cerrarModal('modal_login')">x</button>
 
-            <h2>Acceso administrador</h2>
+            <h2>Acceso Administrador</h2>
 
             <form id="login-form" action="/U.E_Sto_Domingo_Anuncios-gestion_biblioteca/controllers/login.php" method="POST">
                 <input type="text"     name="username" class="form-imput" id="usernameInput" placeholder="Usuario" autofocus required>
@@ -121,8 +121,8 @@
 
             <!-- <button onclick="verificarCredenciales('/U.E_Sto_Domingo_Anuncios-gestion_biblioteca/config/adminConfig.json')" id="loginButton">Ingresar</button> -->
             
-            <p>*usuario y contraseña de prueba:<br>admin / 123456</p>
-            <p id="login-error" style="color: red;"></p>
+            <!-- <p>*usuario y contraseña de prueba:<br>admin / 123456</p>
+            <p id="login-error" style="color: red;"></p> -->
 
 
         </div>

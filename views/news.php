@@ -181,9 +181,9 @@
                 <label for="importance">Filtrar</label>
                 <select name="importance" id="importance" onchange="filtrarNoticias()">
                     <option value="">n/a</option>
-                    <option value="normal">normal</option>
-                    <option value="importante">importante</option>
-                    <option value="urgente">urgente</option>
+                    <option value="normal">Normal</option>
+                    <option value="importante" class="importante">Importante</option>
+                    <option value="urgente" class="urgente">Urgente</option>
                 </select>
 
                 <?php if (isset($_SESSION['username'])) {?>

@@ -110,6 +110,8 @@ function filtrarNoticias(){
     });
 }
 
+//* filtrar recomendaciones por autor
+
 //* añadir libro al prestamo
 function prestarLibro(inputTitle, inputId, bookTitle, bookId){
     const titleInput = document.getElementById(inputTitle);

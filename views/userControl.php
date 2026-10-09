@@ -187,14 +187,14 @@ include __DIR__ . '/../config/db.php';
         <form action="../controllers/crud_register.php" method="post">
 
                 <h3>Usuario</h3>
-                <input type="text" name="username" autofocus required=true placeholder="usuario">
+                <input type="text" name="username" autofocus required=true placeholder="Usuario">
 
                 <h3>Contraseña</h3>
-                <input type="text" name="password" required=true placeholder="contraseña" >
+                <input type="text" name="password" required=true placeholder="Contraseña" >
 
                 <select name="role" id="rol">
-                    <option value="profesor">profesor</option>
-                    <option value="bibliotecario">bibliotecario</option>
+                    <option value="profesor">Profesor</option>
+                    <option value="bibliotecario">Bibliotecario</option>
                 </select>
 
                 <input id="botonSubmit" type="submit" name="save_user" value="Registrar Usuario" >
@@ -206,8 +206,8 @@ include __DIR__ . '/../config/db.php';
                     <tr>
                         <th>Usuario</th>
                         <th>Contraseña</th>
-                        <th>rol</th>
-                        <th>actions</th>
+                        <th>Rol</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>

@@ -43,7 +43,7 @@ require_once __DIR__ . '/../controllers/validarSesionBiblioteca.php';
             border: 2px #658291 dashed;
             border-radius: 20px;
             width: 80%;
-            height: 85%;
+            min-height: 85%;
             background-color: #c8f7cd;
             padding: 10px 15px;
             overflow-y: scroll;
@@ -51,10 +51,10 @@ require_once __DIR__ . '/../controllers/validarSesionBiblioteca.php';
             scrollbar-width: none;
 
             @media (max-width: 1154px) {
-                display: grid;
-                grid-template-columns: 1fr;
+                display: flex;
+                flex-direction:column;
                 /* place-items: center; */
-                height: auto;
+                /* height: auto; */
             }
         }
 
@@ -88,7 +88,7 @@ require_once __DIR__ . '/../controllers/validarSesionBiblioteca.php';
             display: flex;
             flex-direction: column;
             justify-content: center;
-            align-items: center;
+            /* align-items: center; */
         }
 
         form h3 {
@@ -156,6 +156,7 @@ require_once __DIR__ . '/../controllers/validarSesionBiblioteca.php';
 
             @media (max-width: 600px) {
                 padding: 5px 0px;
+                height: 2000px;
             }
         }
 
@@ -280,37 +281,37 @@ require_once __DIR__ . '/../controllers/validarSesionBiblioteca.php';
 <body>
     <article>
 
-        <h2>Agregar libros</h2>
+        <h2>Agregar Libros</h2>
 
         <div id="newsControlContainer">
         <div id="formContainer">    
         <form action="../controllers/crud_books.php" method="post">
 
                 <h3>Titulo</h3>
-                <input type="text" name="title" autofocus required=true placeholder="titulo">
+                <input type="text" name="title" autofocus required=true placeholder="Titulo">
 
                 <h3>Autor</h3>
-                <input type="text" name="author" required=true placeholder="autor">
+                <input type="text" name="author" required=true placeholder="Autor">
 
                 <h3>Editorial</h3>
-                <input type="text" name="publisher" required=true placeholder="editorial">
+                <input type="text" name="publisher" required=true placeholder="Editorial">
 
                 <div class="select-container">
                     <div>
                         <label for="año">Año:</label>
                         <select name="año" id="año">
                             <option value="n/a">n/a</option>
-                            <option value="1er grado">1er grado</option>
-                            <option value="2do grado">2do grado</option>
-                            <option value="3er grado">3er grado</option>
-                            <option value="4to grado">4to grado</option>
-                            <option value="5to grado">5to grado</option>
-                            <option value="6to grado">6to grado</option>
-                            <option value="1er año">1er año</option>
-                            <option value="2do año">2do año</option>
-                            <option value="3er año">3er año</option>
-                            <option value="4to año">4to año</option>
-                            <option value="5to año">5to año</option>
+                            <option value="1er grado">1er Grado</option>
+                            <option value="2do grado">2do Grado</option>
+                            <option value="3er grado">3er Grado</option>
+                            <option value="4to grado">4to Grado</option>
+                            <option value="5to grado">5to Grado</option>
+                            <option value="6to grado">6to Grado</option>
+                            <option value="2do año">2do Año</option>
+                            <option value="3er año">3er Año</option>
+                            <option value="4to año">4to Año</option>
+                            <option value="5to año">5to Año</option>
+                            <option value="1er año">1er Año</option>
                         </select>
                     </div>
 
@@ -318,15 +319,15 @@ require_once __DIR__ . '/../controllers/validarSesionBiblioteca.php';
                         <label for="materia">Materia:</label>
                         <select name="materia" id="materia">
                             <option value="n/a">n/a</option>
-                            <option value="matematicas">matematicas</option>
-                            <option value="biologia">biologia</option>
-                            <option value="quimica">quimica</option>
-                            <option value="fisica">fisica</option>
-                            <option value="educ.fisica">educ.fisica</option>
-                            <option value="geografia">geografia</option>
-                            <option value="historia">historia</option>
-                            <option value="arte">arte y patrimonio</option>
-                            <option value="castellano">castellano</option>
+                            <option value="matematicas">Matematicas</option>
+                            <option value="biologia">Biologia</option>
+                            <option value="quimica">Quimica</option>
+                            <option value="fisica">Fisica</option>
+                            <option value="educ.fisica">Educ.Fisica</option>
+                            <option value="geografia">Geografia</option>
+                            <option value="historia">Historia</option>
+                            <option value="arte">Arte y Patrimonio</option>
+                            <option value="castellano">Castellano</option>
                         </select>
                     </div>
                     <div>
@@ -334,17 +335,17 @@ require_once __DIR__ . '/../controllers/validarSesionBiblioteca.php';
                         <input type="number" name="num_copias" id="num_copias" min="1" value="1">   
                     </div>
                 </div>
-                <h3>Url portada</h3>
-                <input type="text" name="img_url" placeholder="URL de la portada">
+                <h3>Url Portada</h3>
+                <input type="text" name="img_url" placeholder="URL de la Portada">
 
 
-                <input id="botonSubmit" type="submit" name="save_book" value="Registrar libro" >
+                <input id="botonSubmit" type="submit" name="save_book" value="Registrar Libro" >
 
             </form>
         </div>
             <section id="books_container">
         <div id="search">
-            <input type="text" id="searchInput" placeholder="Buscar por título">
+            <input type="text" id="searchInput" placeholder="Buscar por Título">
             <button onclick="filtrarPorTitulo('searchInput', '.controlled_book', '.book_title')">Buscar</button>
         </div>
         
@@ -355,17 +356,17 @@ require_once __DIR__ . '/../controllers/validarSesionBiblioteca.php';
                     while($row = mysqli_fetch_array($result_tasks)){?>
                 <div class="controlled_book">
                     <div class="bookItem" >
-                        <img src="<?php echo $row['img_url']; ?>" alt="portada del libro">
+                        <img src="<?php echo $row['img_url']; ?>" alt="Portada del Libro">
                         <div>
                             <h3 class="book_title"><?php echo $row['title']; ?> <span>                <a href="/U.E_Sto_Domingo_Anuncios-gestion_biblioteca/controllers/crud_books.php?delId=<?php echo (int) $row['id']; ?>">🗑️</a></span></h3>
 
-                            <h4>autor: <?php echo $row['author']; ?></h4>
-                            <h4>editorial: <?php echo $row['publisher']; ?></h4>
-                            <h4><span><?php if($row['year'] !== "n/a") { ?><span>año:</span> <span><?php echo $row['year'];?></span> <?php } ?></span>
-                            <span><?php if($row['materia'] !== "n/a") { ?><span>materia:</span> <span><?php echo $row['materia'];?></span> <?php } ?></span>
+                            <h4>Autor: <?php echo $row['author']; ?></h4>
+                            <h4>Editorial: <?php echo $row['publisher']; ?></h4>
+                            <h4><span><?php if($row['year'] !== "n/a") { ?><span>Año:</span> <span><?php echo $row['year'];?></span> <?php } ?></span>
+                            <span><?php if($row['materia'] !== "n/a") { ?><span>Materia:</span> <span><?php echo $row['materia'];?></span> <?php } ?></span>
                             </h4>
-                            <h4> numero de copias: <span><?php echo $row['num_copies']; ?></span></h4>
-                            <h4>estado:<span><?php echo ((int) $row['num_copies'] > 0) ? 'disponible' : 'no disponible'; ?></span></h4>
+                            <h4> Numero de Copias: <span><?php echo $row['num_copies']; ?></span></h4>
+                            <h4>Estado:<span><?php echo ((int) $row['num_copies'] > 0) ? 'disponible' : 'no disponible'; ?></span></h4>
                         </div>
                     </div>
                 </div>

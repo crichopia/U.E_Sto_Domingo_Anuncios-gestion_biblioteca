@@ -346,14 +346,14 @@ require_once __DIR__ . '/../controllers/validarSesionBiblioteca.php';
 <body>
     <article>
 
-        <h2>Agregar libros</h2>
+        <h2>Prestar Libros</h2>
 
         <div id="newsControlContainer">
         <div id="formContainer">    
         <form action="../controllers/crud_loans.php" method="post">
 
-                <h3>Nombre estudiante:</h3>
-                <input type="text" name="nombreE" autofocus required=true placeholder="Nombre del estudiante">
+                <h3>Nombre Estudiante:</h3>
+                <input type="text" name="nombreE" autofocus required=true placeholder="Nombre del Estudiante">
 
                 <h3>Cedula</h3>
                 <input type="text" name="cedulaE" placeholder="Cedula">
@@ -363,7 +363,7 @@ require_once __DIR__ . '/../controllers/validarSesionBiblioteca.php';
 
                 <h3>Libro</h3>
                 <div style=" display: flex; gap: 5px; align-items: center;">
-                <input id="book_name" type="text" name="book_name" placeholder="nombre del libro" readonly required style=" width: 80%;">
+                <input id="book_name" type="text" name="book_name" placeholder="Nombre del Libro" readonly required style=" width: 80%;">
                 <button id="boton_Aniadir" class="controlarLibro" type="button" onclick="abrirModal('modal_libros')"><i class="fa-solid fa-plus"></i></button>
                 <button id="boton_Eliminar" class="controlarLibro hidden" type="button" onclick="eliminarLibroDelPrestamo('book_name', 'book_id'); cambiarBotonPrestamo('boton_Aniadir', 'boton_Eliminar');"><i class="fa-solid fa-minus"></i></button>
                 </div>
@@ -419,7 +419,7 @@ require_once __DIR__ . '/../controllers/validarSesionBiblioteca.php';
                     while($row = mysqli_fetch_array($result_tasks)){?>
                 <div class="controlled_book">
                 <div class="bookItem" id="<?php echo $row['id']; ?>" data-year="<?php echo htmlspecialchars($row['year'], ENT_QUOTES, 'UTF-8'); ?>" data-materia="<?php echo htmlspecialchars($row['materia'], ENT_QUOTES, 'UTF-8'); ?>">
-                    <img src="<?php echo $row['img_url']; ?>" alt="portada dellibro">
+                    <img src="<?php echo $row['img_url']; ?>" alt="Portada del Libro">
                     <div style="display: flex; width:100%; flex-direction: column; gap: 5px;">
                         <h3 class="book_title"><?php echo $row['title']; ?></h3>
                         <h4>Año: <?php echo $row['year']; ?></h4>

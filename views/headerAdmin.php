@@ -166,26 +166,24 @@
             </div>
             <?php
                 if (isset($_SESSION['username'])) {?>
-                    <button class="btnMenu" id="admin-btn" onclick="window.location.href='/U.E_Sto_Domingo_Anuncios-gestion_biblioteca/controllers/logout.php'">Cerrar sesión</button>
+                    <button class="btnMenu" id="admin-btn" onclick="window.location.href='/U.E_Sto_Domingo_Anuncios-gestion_biblioteca/controllers/logout.php'">Cerrar Sesión</button>
             <?php } else {?>
-                    <button class="btnMenu" id="admin-btn" onclick="abrirModal('modal_login') ">Acceso administrador</button>
+                    <button class="btnMenu" id="admin-btn" onclick="abrirModal('modal_login') ">Acceso Administrador</button>
             <?php } ?>
 
         </div>
         <nav>
             <a href="/U.E_Sto_Domingo_Anuncios-gestion_biblioteca/dashboards/newsDashboard.php">Noticias</a>
             <a href="/U.E_Sto_Domingo_Anuncios-gestion_biblioteca/dashboards/bibliotecaDashboard.php">Biblioteca</a>
-            <a href="/U.E_Sto_Domingo_Anuncios-gestion_biblioteca/index.php">Páginas recomendadas</a>
+            <a href="/U.E_Sto_Domingo_Anuncios-gestion_biblioteca/dashboards/recomenacionesDashboard.php">Páginas Recomendadas</a>
             <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin' || isset($_SESSION['role']) && $_SESSION['role'] === 'bibliotecario') { ?>
-            <a href="/U.E_Sto_Domingo_Anuncios-gestion_biblioteca/adminDashboards/loansDashboard.php">Libros prestados</a>
+            <a href="/U.E_Sto_Domingo_Anuncios-gestion_biblioteca/adminDashboards/loansDashboard.php">Libros Prestados</a>
             <?php } ?>
 
             <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin') { ?>
-            <a href="/U.E_Sto_Domingo_Anuncios-gestion_biblioteca/adminDashboards/registerDashboard.php">Añadir nuevo usuario</a>
+            <a href="/U.E_Sto_Domingo_Anuncios-gestion_biblioteca/adminDashboards/registerDashboard.php">Añadir Nuevo Usuario</a>
             <?php } ?>
-
         </nav>
     </header>
-
 </body>
 </html>

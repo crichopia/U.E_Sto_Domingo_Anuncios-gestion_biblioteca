@@ -205,7 +205,7 @@
 <body>
     <article>
 
-        <h2>Control de usuarios</h2>
+        <h2>Control de Noticias</h2>
 
         <div id="newsControlContainer">
             <div id="formContainer">
@@ -213,17 +213,17 @@
                 <form action="../controllers/crud_news.php" method="post">
     
                     <h3>Titulo</h3>
-                    <input type="text" name="title" autofocus required=true placeholder="titulo">
+                    <input type="text" name="title" autofocus required=true placeholder="Titulo">
     
                     <h3>Contenido</h3>
-                    <textarea name="content" required=true placeholder="contenido"></textarea>
+                    <textarea name="content" required=true placeholder="Contenido"></textarea>
     
                     <select name="importance" id="materia">
-                        <option value="normal">normal</option>
-                        <option value="importante">importante</option>
-                        <option value="urgente">urgente</option>
+                        <option value="normal">Normal</option>
+                        <option value="importante">Importante</option>
+                        <option value="urgente">Urgente</option>
                     </select>
-                    <input id="botonSubmit" type="submit" name="save_announcement" value="Registrar aviso" >
+                    <input id="botonSubmit" type="submit" name="save_announcement" value="Registrar Aviso" >
     
                 </form>
             </div>
