@@ -21,11 +21,7 @@ async function verificarCredenciales(ruta) {
         // Comparar los valores del JSON con los inputs
         if (datos.username === usernameInput && datos.password === passwordInput) {
             document.getElementById('login-error').innerText = '';
-            loadElement('main', 'views/adminDashboard.html');
-            loadElement('header', 'views/headerAdmin.html');
-            cerrarModal('modal_login');
-            // activateAdminFunctions()
-            alert("Bienvenido, sr admin");
+            window.location.href = '/U.E_Sto_Domingo_Anuncios-gestion_biblioteca/dashboards/newsDashboard.php';
 
         } else {
             document.getElementById('login-error').innerText = '❌ Usuario o contraseña incorrectos.';
@@ -37,8 +33,7 @@ async function verificarCredenciales(ruta) {
 }
 
 function logout(){
-    loadElement('main', 'views/workinprogress.html');
-    loadElement('header', 'views/header.html');
+    window.location.href = '/U.E_Sto_Domingo_Anuncios-gestion_biblioteca/controllers/logout.php';
     // removeAdminFunctions()
     // document.getElementById('login-error').innerText = '';
     

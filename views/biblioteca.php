@@ -1,12 +1,6 @@
-<?php include __DIR__ . '/../config/db.php';?>
-<?php session_start(); ?>
+<?php require_once __DIR__ . '/../config/db.php'; ?>
+<?php if (session_status() !== PHP_SESSION_ACTIVE) session_start(); ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
     <style>
         body{
         margin:                      0;
@@ -196,8 +190,6 @@
 
     </style>
 
-</head>
-<body>
     <article>
         <div id="titulo">
             <h2>Consultar Biblioteca</h2>
@@ -249,9 +241,9 @@
         <section id="booksContainer">
             <?php
                 $query = "SELECT * FROM books ORDER BY id DESC";
-                $result_tasks  = mysqli_query($conn, $query);
+                $result_tasks = $conn->query($query);
 
-                while($row = mysqli_fetch_array($result_tasks)){?>
+                while ($row = $result_tasks->fetch(PDO::FETCH_ASSOC)) {?>
             <div class="bookItem <?php echo ((int) $row['num_copies'] > 0) ? 'disponible' : 'disponiblent'; ?>" data-year="<?php echo htmlspecialchars($row['year'], ENT_QUOTES, 'UTF-8'); ?>" data-materia="<?php echo htmlspecialchars($row['materia'], ENT_QUOTES, 'UTF-8'); ?>">
                 <img src="<?php echo $row['img_url']; ?>" alt="Portada del Libro">
                 <div>
@@ -270,5 +262,3 @@
 
         </section>
     </article>
-</body>
-</html>

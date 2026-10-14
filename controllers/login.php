@@ -5,14 +5,12 @@ if (isset($_POST['login'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    // Consulta para verificar el usuario y la contraseña
-    // $query = "SELECT * FROM user_data WHERE username = '$username' AND password = '$password'";
-    $query = "SELECT * FROM user_data WHERE username = '$username'";
-    $result = mysqli_query($conn, $query);
+    $stmt = $conn->prepare('SELECT * FROM user_data WHERE username = ?');
+    $stmt->execute([$username]);
+    $row = $stmt->fetch();
 
-    if (mysqli_num_rows($result) == 1) {
+    if ($row !== false) {
         // Usuario encontrado, iniciar sesión
-        $row = mysqli_fetch_array($result);
         $db_username = $row['username'];
         $db_password = $row['password'];
         $role        = $row['role'];

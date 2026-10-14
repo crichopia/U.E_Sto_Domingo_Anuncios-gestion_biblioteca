@@ -1,13 +1,7 @@
 <?php 
-include __DIR__ . '/../config/db.php';
+require_once __DIR__ . '/../config/db.php';
 require_once __DIR__ . '/../controllers/validarSesionBiblioteca.php';
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
     <style>
         body {
             margin: 0;
@@ -277,8 +271,6 @@ require_once __DIR__ . '/../controllers/validarSesionBiblioteca.php';
             background-color: #009774;
         }
     </style>
-</head>
-<body>
     <article>
 
         <h2>Agregar Libros</h2>
@@ -351,9 +343,8 @@ require_once __DIR__ . '/../controllers/validarSesionBiblioteca.php';
         
             <?php
                     $query = "SELECT * FROM books ORDER BY id DESC";
-                    $result_tasks  = mysqli_query($conn, $query);
-
-                    while($row = mysqli_fetch_array($result_tasks)){?>
+                    $result_tasks = $conn->query($query);
+                    while ($row = $result_tasks->fetch(PDO::FETCH_ASSOC)) {?>
                 <div class="controlled_book">
                     <div class="bookItem" >
                         <img src="<?php echo $row['img_url']; ?>" alt="Portada del Libro">
@@ -375,5 +366,3 @@ require_once __DIR__ . '/../controllers/validarSesionBiblioteca.php';
             </section>
         </div>
     </article>
-</body>
-</html>

@@ -23,18 +23,11 @@ if (isset($_POST['save_announcement']) || isset($_POST['save_book'])) {
     $stmt = $conn->prepare(
         'INSERT INTO books (img_url, title, author, publisher, `year`, materia, num_copies) VALUES (?, ?, ?, ?, ?, ?, ?)'
     );
-    if (!$stmt) {
-        http_response_code(500);
-        exit('No se pudo preparar el registro del libro.');
-    }
-
-    $stmt->bind_param('ssssssi', $imgUrl, $title, $author, $publisher, $year, $materia, $numCopies);
-    if (!$stmt->execute()) {
+    if (!$stmt->execute([$imgUrl, $title, $author, $publisher, $year, $materia, $numCopies])) {
         http_response_code(500);
         exit('No se pudo registrar el libro.');
     }
 
-    $stmt->close();
     header('Location: ../adminDashboards/addBooksDashboard.php');
     exit;
 }
@@ -47,22 +40,14 @@ if (isset($_GET['delId'])) {
     }
 
     $stmt = $conn->prepare('DELETE FROM books WHERE id = ?');
-    if (!$stmt) {
-        http_response_code(500);
-        exit('No se pudo preparar la eliminación del libro.');
-    }
-
-    $stmt->bind_param('i', $id);
-    if (!$stmt->execute()) {
+    if (!$stmt->execute([$id])) {
         http_response_code(500);
         exit('No se pudo eliminar el libro.');
     }
 
-    $stmt->close();
     header('Location: ../adminDashboards/addBooksDashboard.php');
     exit;
 }
 
 http_response_code(400);
 exit('No se indicó una acción válida para libros.');
-

@@ -6,44 +6,31 @@ if (isset($_POST['save_user'])){
     $password = $_POST['password'];
     $role = $_POST['role'];
 
-    // echo $username.$password.$role;
-    $query = "INSERT INTO user_data(username, password, role) VALUES ('$username', '$password', '$role')";
-    $result = mysqli_query($conn, $query);
-    if(!$result){
-        die("Query failed");
-    }
+    $stmt = $conn->prepare('INSERT INTO user_data (username, password, role) VALUES (?, ?, ?)');
+    $stmt->execute([$username, $password, $role]);
     header("Location: ../adminDashboards/registerDashboard.php");
     exit;
 }
 
 if (isset($_GET['delId'])){
     $id = $_GET['delId'];
-    $query = "DELETE FROM user_data WHERE id = '$id'";
-
-    $result = mysqli_query($conn, $query);
-
-    if(!$result){
-        die("Query failed");
-    }
+    $stmt = $conn->prepare('DELETE FROM user_data WHERE id = ?');
+    $stmt->execute([$id]);
     header("Location: ../adminDashboards/registerDashboard.php");
     exit;
 }
 
 if (isset($_GET['editId'])){
     $id = $_GET['editId'];
-    $query = "SELECT * FROM user_data WHERE id = '$id'";
+    $stmt = $conn->prepare('SELECT * FROM user_data WHERE id = ?');
+    $stmt->execute([$id]);
+    $row = $stmt->fetch();
 
-    $result = mysqli_query($conn, $query);
-
-    if (mysqli_num_rows($result) == 1){
-        $row = mysqli_fetch_array($result);
+    if ($row !== false) {
         $username = $row['username'];
         $password = $row['password'];
         $role     = $row['role'];
         // echo $username.$password;
-    }
-    if(!$result){
-        die("Query failed");
     }
 }
 if (isset($_POST['update'])){
@@ -52,8 +39,8 @@ if (isset($_POST['update'])){
     $password = $_POST['password'];
     $role = $_POST['role'];
 
-    $query = "UPDATE user_data set username = '$username', password = '$password', role = '$role' WHERE Id = $id";
-    mysqli_query($conn, $query);
+    $stmt = $conn->prepare('UPDATE user_data SET username = ?, password = ?, role = ? WHERE Id = ?');
+    $stmt->execute([$username, $password, $role, $id]);
 
     header("Location: ../adminDashboards/registerDashboard.php");
     exit;

@@ -1,9 +1,3 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
     <style>
 
         body {
@@ -35,10 +29,6 @@
     </style>
 
 
-</head>
-<body>
         <footer>
             <p>Unidad educativa santo domingo de guzman -2026   <a href="https://github.com/crichopia/U.E_Sto_Domingo_Anuncios-gestion_biblioteca" target="_blank">repositorio</a></p>
         </footer>
-</body>
-</html>

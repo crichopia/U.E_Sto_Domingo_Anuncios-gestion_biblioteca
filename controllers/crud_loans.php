@@ -19,23 +19,16 @@ if (isset($_POST['save_loan'])) {
     }
 
     try {
-        $conn->begin_transaction();
+        $conn->beginTransaction();
 
         $updateCopies = $conn->prepare(
             'UPDATE books SET num_copies = num_copies - 1 WHERE id = ? AND num_copies > 0'
         );
-        if (!$updateCopies) {
-            throw new RuntimeException('No se pudo preparar la actualización de existencias.');
-        }
-        $updateCopies->bind_param('i', $bookId);
-        if (!$updateCopies->execute()) {
-            throw new RuntimeException('No se pudieron actualizar las existencias.');
-        }
-        $hasAvailableCopy = $updateCopies->affected_rows === 1;
-        $updateCopies->close();
+        $updateCopies->execute([$bookId]);
+        $hasAvailableCopy = $updateCopies->rowCount() === 1;
 
         if (!$hasAvailableCopy) {
-            $conn->rollback();
+            $conn->rollBack();
             http_response_code(409);
             exit('El libro no existe o no tiene copias disponibles.');
         }
@@ -43,20 +36,13 @@ if (isset($_POST['save_loan'])) {
         $insertLoan = $conn->prepare(
             'INSERT INTO loans (student_name, cedula, bibliotecario, book_id, book_name) VALUES (?, ?, ?, ?, ?)'
         );
-        if (!$insertLoan) {
-            throw new RuntimeException('No se pudo preparar el registro del préstamo.');
-        }
-        $insertLoan->bind_param('sssis', $studentName, $cedula, $bibliotecario, $bookId, $bookName);
-        if (!$insertLoan->execute()) {
-            throw new RuntimeException('No se pudo registrar el préstamo.');
-        }
-        $insertLoan->close();
+        $insertLoan->execute([$studentName, $cedula, $bibliotecario, $bookId, $bookName]);
 
-        if (!$conn->commit()) {
-            throw new RuntimeException('No se pudo confirmar el préstamo.');
-        }
+        $conn->commit();
     } catch (Throwable $error) {
-        $conn->rollback();
+        if ($conn->inTransaction()) {
+            $conn->rollBack();
+        }
         http_response_code(500);
         exit('Ocurrió un error al registrar el préstamo.');
     }
@@ -73,52 +59,33 @@ if (isset($_GET['delId'])) {
     }
 
     try {
-        $conn->begin_transaction();
+        $conn->beginTransaction();
 
         $findLoan = $conn->prepare('SELECT book_id FROM loans WHERE id = ? FOR UPDATE');
-        if (!$findLoan) {
-            throw new RuntimeException('No se pudo buscar el préstamo.');
-        }
-        $findLoan->bind_param('i', $loanId);
-        if (!$findLoan->execute()) {
-            throw new RuntimeException('No se pudo buscar el préstamo.');
-        }
-        $bookId = 0;
-        $findLoan->bind_result($bookId);
-        $loanExists = $findLoan->fetch();
-        $findLoan->close();
+        $findLoan->execute([$loanId]);
+        $bookId = $findLoan->fetchColumn();
 
-        if (!$loanExists) {
-            $conn->rollback();
+        if ($bookId === false) {
+            $conn->rollBack();
             http_response_code(404);
             exit('No se encontró el préstamo.');
         }
 
         $deleteLoan = $conn->prepare('DELETE FROM loans WHERE id = ?');
-        if (!$deleteLoan) {
-            throw new RuntimeException('No se pudo preparar la eliminación del préstamo.');
-        }
-        $deleteLoan->bind_param('i', $loanId);
-        if (!$deleteLoan->execute() || $deleteLoan->affected_rows !== 1) {
+        if (!$deleteLoan->execute([$loanId]) || $deleteLoan->rowCount() !== 1) {
             throw new RuntimeException('No se pudo eliminar el préstamo.');
         }
-        $deleteLoan->close();
 
         $restoreCopy = $conn->prepare('UPDATE books SET num_copies = num_copies + 1 WHERE id = ?');
-        if (!$restoreCopy) {
-            throw new RuntimeException('No se pudo preparar la devolución de la copia.');
-        }
-        $restoreCopy->bind_param('i', $bookId);
-        if (!$restoreCopy->execute() || $restoreCopy->affected_rows !== 1) {
+        if (!$restoreCopy->execute([$bookId]) || $restoreCopy->rowCount() !== 1) {
             throw new RuntimeException('No se pudo devolver la copia al inventario.');
         }
-        $restoreCopy->close();
 
-        if (!$conn->commit()) {
-            throw new RuntimeException('No se pudo confirmar la eliminación del préstamo.');
-        }
+        $conn->commit();
     } catch (Throwable $error) {
-        $conn->rollback();
+        if ($conn->inTransaction()) {
+            $conn->rollBack();
+        }
         http_response_code(500);
         exit('Ocurrió un error al eliminar el préstamo.');
     }
@@ -129,4 +96,3 @@ if (isset($_GET['delId'])) {
 
 http_response_code(400);
 exit('No se indicó una acción válida para préstamos.');
-

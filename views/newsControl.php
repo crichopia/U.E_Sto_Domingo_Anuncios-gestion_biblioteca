@@ -1,11 +1,5 @@
-<?php include __DIR__ . '/../config/db.php';?>
-<?php session_start(); ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+<?php require_once __DIR__ . '/../config/db.php'; ?>
+<?php if (session_status() !== PHP_SESSION_ACTIVE) session_start(); ?>
     <style>
         body{
         margin:                      0;
@@ -201,8 +195,6 @@
             place-items: center;
         }
 </style>
-</head>
-<body>
     <article>
 
         <h2>Control de Noticias</h2>
@@ -231,8 +223,8 @@
             <section id="news_container">
                 <?php
                     $query = "SELECT * FROM announcements ORDER BY id DESC";
-                    $result_tasks  = mysqli_query($conn, $query);
-                    while($row = mysqli_fetch_array($result_tasks)){?>
+                    $result_tasks = $conn->query($query);
+                    while ($row = $result_tasks->fetch(PDO::FETCH_ASSOC)) {?>
                         <div class="controlled_new">
                             <div class="news_item <?php echo $row['importance']; ?>">
                                 <h3 class="new_title" id="title_new-1"><?php echo $row['title']; ?></h3>
@@ -252,5 +244,3 @@
             </section>
         </div>
     </article>
-</body>
-</html>

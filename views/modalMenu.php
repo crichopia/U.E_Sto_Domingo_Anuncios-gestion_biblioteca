@@ -1,10 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-
     <style> 
         body{
             box-sizing:         border-box;
@@ -93,10 +86,7 @@
             justify-content:center;
         }
     </style>
-</head>
-
-<body>
-    <?php session_start(); ?>
+    <?php if (session_status() !== PHP_SESSION_ACTIVE) session_start(); ?>
 
     <div class="modal hidden" id="modal_menu">
         <div id="modalMenu_container">
@@ -104,10 +94,10 @@
                 <button id="btn_cerrar_menu" onclick="cerrarModal('modal_menu')">x</button>
                 <h2>- Menu -</h2>
                 <hr>
-                <button class="btnMenu"  onclick="cerrarModal('modal_menu'),loadElement('main', '/U.E_Sto_Domingo_Anuncios-gestion_biblioteca/views/newsDashboard.php');">Anuncios</button>
+                <button class="btnMenu" onclick="window.location.href='/U.E_Sto_Domingo_Anuncios-gestion_biblioteca/dashboards/newsDashboard.php'">Anuncios</button>
                 <button class="btnMenu" onclick="window.location.href='/U.E_Sto_Domingo_Anuncios-gestion_biblioteca/adminDashboards/bibliotecaDashboard.php'">Biblioteca</button>
 
-                <button class="btnMenu"  onclick="cerrarModal('modal_menu'),loadElement('main', '/U.E_Sto_Domingo_Anuncios-gestion_biblioteca/views/workinprogress.php');">Recomendaciones de <br>los profesores</button>
+                <button class="btnMenu" onclick="window.location.href='/U.E_Sto_Domingo_Anuncios-gestion_biblioteca/dashboards/recomenacionesDashboard.php'">Recomendaciones de <br>los profesores</button>
                 <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin') { ?>
                     <button class="btnMenu" onclick="window.location.href='/U.E_Sto_Domingo_Anuncios-gestion_biblioteca/adminDashboards/registerDashboard.php'">Añadir nuevo <br>usuario</button>
                 <?php } ?>
@@ -121,7 +111,3 @@
             </div>
         </div>
     </div>
-<script src="/U.E_Sto_Domingo_Anuncios-gestion_biblioteca/public/controllers/login.js"></script>
-
-</body>
-</html>

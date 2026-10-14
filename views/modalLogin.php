@@ -1,9 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
     <style>
         #formulario_admin{
             width:                      60vw;
@@ -101,9 +95,7 @@
             }
         }
     </style>
-</head>
-<body>
-    
+
     <div class="overlay hidden"></div>
     
     <div class="modal hidden" id="modal_login">
@@ -131,9 +123,3 @@
         document.getElementById('usernameInput').value = '';
         document.getElementById('passwordInput').value = '';
     </script>
-    <script src="controllers/login.js"></script>
-    <script src="controllers/login.js"></script>
-
-</body>
-</html>
-

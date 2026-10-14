@@ -1,13 +1,7 @@
 <?php 
-include __DIR__ . '/../config/db.php';
+require_once __DIR__ . '/../config/db.php';
 require_once __DIR__ . '/../controllers/validarSesionBiblioteca.php';
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
     <style>
         body {
             margin: 0;
@@ -342,8 +336,6 @@ require_once __DIR__ . '/../controllers/validarSesionBiblioteca.php';
 
         }
     </style>
-</head>
-<body>
     <article>
 
         <h2>Prestar Libros</h2>
@@ -375,9 +367,9 @@ require_once __DIR__ . '/../controllers/validarSesionBiblioteca.php';
             <section id="books_container">
             <?php
                     $query = "SELECT * FROM loans ORDER BY id DESC";
-                    $result_tasks  = mysqli_query($conn, $query);
+                    $result_tasks = $conn->query($query);
 
-                    while($row = mysqli_fetch_array($result_tasks)){?>
+                    while ($row = $result_tasks->fetch(PDO::FETCH_ASSOC)) {?>
                 <div class="controlled_book">
                     <div class="loanItem" >
                         <div style="display: flex; gap: 5px; align-items: baseline;">
@@ -414,9 +406,9 @@ require_once __DIR__ . '/../controllers/validarSesionBiblioteca.php';
             <section id="books_container">
                 <?php
                     $query = "SELECT * FROM books ORDER BY id DESC";
-                    $result_tasks  = mysqli_query($conn, $query);
+                    $result_tasks = $conn->query($query);
 
-                    while($row = mysqli_fetch_array($result_tasks)){?>
+                    while ($row = $result_tasks->fetch(PDO::FETCH_ASSOC)) {?>
                 <div class="controlled_book">
                 <div class="bookItem" id="<?php echo $row['id']; ?>" data-year="<?php echo htmlspecialchars($row['year'], ENT_QUOTES, 'UTF-8'); ?>" data-materia="<?php echo htmlspecialchars($row['materia'], ENT_QUOTES, 'UTF-8'); ?>">
                     <img src="<?php echo $row['img_url']; ?>" alt="Portada del Libro">
@@ -435,5 +427,3 @@ require_once __DIR__ . '/../controllers/validarSesionBiblioteca.php';
                 <?php } ?>
             </section>
         </div>
-</body>
-</html>

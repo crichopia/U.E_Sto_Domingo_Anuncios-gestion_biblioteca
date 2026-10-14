@@ -1,13 +1,7 @@
 <?php 
-include __DIR__ . '/../config/db.php';
+require_once __DIR__ . '/../config/db.php';
 // require_once __DIR__ . '/../controllers/validarSesionAdmin.php';
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
     <style>
         body{
         margin:                      0;
@@ -175,8 +169,6 @@ include __DIR__ . '/../config/db.php';
 
 
 </style>
-</head>
-<body>
     <article>
 
         <h2>Control de usuarios</h2>
@@ -214,9 +206,9 @@ include __DIR__ . '/../config/db.php';
 
                     <?php 
                         $query = "SELECT * FROM user_data";
-                        $result_tasks  = mysqli_query($conn, $query);
+                        $result_tasks = $conn->query($query);
 
-                        while($row = mysqli_fetch_array($result_tasks)){?>
+                        while ($row = $result_tasks->fetch(PDO::FETCH_ASSOC)) {?>
                         
                             <tr class="dataUser">
                                 <td><?php echo $row['username']?></td>
@@ -238,5 +230,3 @@ include __DIR__ . '/../config/db.php';
             </table>
         </div>
     </article>
-</body>
-</html>
