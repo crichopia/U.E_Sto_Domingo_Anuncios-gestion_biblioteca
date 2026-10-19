@@ -123,3 +123,28 @@ function cambiarBotonPrestamo(idAniadir, idEliminar) {
     botonAniadir.classList.toggle('hidden');
     botonEliminar.classList.toggle('hidden');
 }
+
+//* gestionar visibilidad de formularios
+function rotarIcono(el){
+    console.log('rotarIcono called', el);
+    if (!el) {
+        console.warn('rotarIcono: no element passed');
+        return;
+    }
+    el.classList.toggle('rotado');
+}
+
+function abrirFormulario(id){
+    const formulario = typeof id === 'string'
+        ? document.getElementById(id)
+        : id instanceof Element ? id : null;
+
+    if (!formulario) {
+        console.warn('abrirFormulario: no se encontró el formulario');
+        return;
+    }
+
+    const cerrado = formulario.classList.toggle('cerrado');
+    formulario.setAttribute('aria-hidden', String(cerrado));
+    formulario.inert = cerrado;
+}

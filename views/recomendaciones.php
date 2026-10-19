@@ -44,6 +44,11 @@
             height:              85%;
             background-color:  #c8f7cd;
             padding:           10px 30px;
+            @media (max-width: 600px){
+                width: 90%;
+                padding: 10px 15px;
+                
+            }
         }
         #news_container{
             display:                flex;
@@ -130,6 +135,9 @@
             margin-bottom:                10px;
             padding:                 10px 20px;
             width: 80%;
+            @media (max-width: 600px){
+                width: 70%;
+            }
         }
 
         .news_item .hidden{
@@ -145,10 +153,16 @@
         .news_item h3{
             margin:           0;
             margin-bottom: 5px ;
+            @media (max-width: 600px){
+                font-size: 18px;
+            }
         }
 
         .news_item h4{
             margin: 0;
+            @media (max-width: 600px){
+                font-size: 16px;
+            }
         }
         #addRecomendation {
             padding:    5px 8px;
@@ -188,7 +202,14 @@
             width: 100%;
                 font-size: 12px;
             }
-
+        }
+        .url{
+            display: inline-block; /* O 'block' según tu diseño */
+            max-width: 200px;      /* Define el ancho máximo que deseas */
+            overflow: hidden;      /* Esconde el texto que se pasa del límite */
+            white-space: nowrap;   /* Evita que el texto salte a la siguiente línea */
+            text-overflow: ellipsis; /* Añade los tres puntos (...) al final */
+        
         }
         select{
             padding: 5px 8px;
@@ -217,6 +238,11 @@
                 /* font-size: 15px; */
             }
         }
+.iconLink{
+    text-decoration: none;
+    color: #223944;
+
+}
 
     </style>
 
@@ -241,8 +267,9 @@
                         </option>
                     <?php } ?>
                 </select>
-
-                <button type="button" id="openFilters" onclick="abrirModal('modal_recomendar')">Recomendar una Página</button>
+                <?php if (isset($_SESSION['username'])) {?>
+                    <button type="button" id="openFilters" onclick="abrirModal('modal_recomendar')">Recomendar una Página</button>
+                <?php } ?>
             </div>
             <section id="news_container">
                 <?php
@@ -250,26 +277,29 @@
                     $result_tasks = $conn->query($query);
 
                     while ($row = $result_tasks->fetch(PDO::FETCH_ASSOC)) {?>
-                        <div class="news_item <?php
+                        <div style="display: flex; align-items: center; justify-content: center; width: 100%; gap: 10px;">
+                        
+                            <?php if (isset($_SESSION['username'])) { ?>
+                            <?php if (($_SESSION['username'] === $row['autor'] || $_SESSION['role'] === 'admin')){?>
+                            <div class="controlled_new">
+                                <a href="/U.E_Sto_Domingo_Anuncios-gestion_biblioteca/controllers/crud_recomendations.php?delId=<?php echo $row['id']; ?>" class="iconLink"><i class="fa-solid fa-trash"></i></a>
+                            </div>
+                            <?php } ?>
+                            <?php } ?>
+                            <div class="news_item <?php
                         $autor = $row['autor'];
                         $sin_espacios = str_replace(' ', '', $autor);
                         echo ($sin_espacios); ?>">
 
                         <div style="display:flex; gap:20px;">
                             <h3 class="new_title" id="title_new-1">Recomendacion de: <?php echo $row['autor']; ?></h3>
-                            <?php if (isset($_SESSION['username'])) { ?>
-                                <?php if (($_SESSION['username'] === $row['autor'] || $_SESSION['role'] === 'admin')){?>
-                                <div class="controlled_new">
-                                    <a href="/U.E_Sto_Domingo_Anuncios-gestion_biblioteca/controllers/crud_recomendations.php?delId=<?php echo $row['id']; ?>">🗑️</a>
-                                </div>
-                                <?php } ?>
-                            <?php } ?>                                    
                         </div>
-                            <hr>
-                            <h4><?php echo $row['descripcion']; ?></h4>
-                            <a href="<?php echo $row['url_recomendacion']; ?>" target="_blank"><?php echo $row['url_recomendacion']; ?></a>
+                        <hr>
+                        <h4><?php echo $row['descripcion']; ?></h4>
+                        <a href="<?php echo $row['url_recomendacion']; ?>" class="url" target="_blank"><?php echo $row['url_recomendacion']; ?></a>
                         </div>
-                <?php } ?>
+                        </div>
+                    <?php } ?>
             </section>
         </div>
     </article>

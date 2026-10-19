@@ -88,6 +88,10 @@
                 position:     absolute;
                 top:              25px;
                 right:            45px;
+                @media(max-width: 700px){
+                    right:            20px;
+                
+                }
             }
 
             #loginButton{

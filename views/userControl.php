@@ -167,6 +167,11 @@ require_once __DIR__ . '/../config/db.php';
 
         }
 
+.iconLink{
+    text-decoration: none;
+    color: #223944;
+
+}
 
 </style>
     <article>
@@ -216,8 +221,8 @@ require_once __DIR__ . '/../config/db.php';
                                 <td><?php echo $row['role']?></td>
                                 <td>
                                     <?php if (strtolower($row['role']) !== 'admin') { ?>
-                                        <a href="/U.E_Sto_Domingo_Anuncios-gestion_biblioteca/controllers/crud_register.php?delId=<?php echo $row['id']; ?>">🗑️</a>
-                                        <a href="/U.E_Sto_Domingo_Anuncios-gestion_biblioteca/controllers/crud_register.php?editId=<?php echo $row['id']; ?>">✏️</a>
+                                        <a href="/U.E_Sto_Domingo_Anuncios-gestion_biblioteca/controllers/crud_register.php?delId=<?php echo $row['id']; ?>" class="iconLink"><i class="fa-solid fa-trash"></i></a>
+                                        <a href="/U.E_Sto_Domingo_Anuncios-gestion_biblioteca/controllers/crud_register.php?editId=<?php echo $row['id']; ?>" class="iconLink"><i class="fa-solid fa-edit"></i></a>
                                     <?php } ?>                                    
                                 </td>
 

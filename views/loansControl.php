@@ -37,7 +37,7 @@ require_once __DIR__ . '/../controllers/validarSesionBiblioteca.php';
             border: 2px #658291 dashed;
             border-radius: 20px;
             width: 80%;
-            height: 85%;
+            min-height: 85%;
             background-color: #c8f7cd;
             padding: 10px 15px;
             overflow-y: scroll;
@@ -45,8 +45,8 @@ require_once __DIR__ . '/../controllers/validarSesionBiblioteca.php';
             scrollbar-width: none;
 
             @media (max-width: 1154px) {
-                display: grid;
-                grid-template-columns: 1fr;
+                display: flex;
+                flex-direction:column;
                 /* place-items: center; */
                 height: auto;
             }
@@ -333,15 +333,57 @@ require_once __DIR__ . '/../controllers/validarSesionBiblioteca.php';
             font-size: 30px; 
             align-self: flex-end;
             color: #223944;
-
         }
+.icono-rotar {
+    display: none;
+    cursor:           pointer;
+    color: #223944;
+    font-size: 25px;
+    align-self: center;
+    transition: transform 0.35s ease;
+    @media (max-width: 1154px) {
+    display: inline-block;
+
+}
+
+}
+
+.rotado{
+    transform: rotate(180deg);
+
+}
+        #bookFormWrapper {
+            display: grid;
+            grid-template-rows: minmax(0, 1fr);
+            opacity: 1;
+            transition: grid-template-rows 0.35s ease, opacity 0.35s ease;
+        }
+
+        #bookFormWrapper.cerrado {
+            grid-template-rows: minmax(0, 0fr);
+            opacity: 0;
+        }
+
+        #bookFormWrapper > form {
+            height: auto;
+            min-height: 0;
+            overflow: hidden;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            #bookFormWrapper {
+                transition: none;
+            }
+        }
+
     </style>
     <article>
 
         <h2>Prestar Libros</h2>
 
         <div id="newsControlContainer">
-        <div id="formContainer">    
+        <div id="formContainer">
+        <div id="bookFormWrapper">    
         <form action="../controllers/crud_loans.php" method="post">
 
                 <h3>Nombre Estudiante:</h3>
@@ -363,6 +405,8 @@ require_once __DIR__ . '/../controllers/validarSesionBiblioteca.php';
                 <input id="botonSubmit" type="submit" name="save_loan" value="Registrar libro" >
 
             </form>
+        </div>
+            <i class="fa-solid fa-angle-up icono-rotar" onclick="rotarIcono(this); abrirFormulario('bookFormWrapper')"></i>
         </div>
             <section id="books_container">
             <?php

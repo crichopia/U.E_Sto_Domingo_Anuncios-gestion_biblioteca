@@ -49,7 +49,8 @@
             -ms-overflow-style:     none;    /* IE 10+ */
             scrollbar-width:         none;       /* Firefox */
             @media (max-width: 1200px){
-                grid-template-columns: 1fr;
+            display:flex;
+            flex-direction: column;
                 width: 90%;
                 /* height: auto; */
             }

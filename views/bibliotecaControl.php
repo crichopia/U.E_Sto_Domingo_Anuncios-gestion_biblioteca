@@ -85,6 +85,7 @@ require_once __DIR__ . '/../controllers/validarSesionBiblioteca.php';
             /* align-items: center; */
         }
 
+
         form h3 {
             margin: 0;
             color: #223944;
@@ -160,6 +161,7 @@ require_once __DIR__ . '/../controllers/validarSesionBiblioteca.php';
             border-radius: 25px;
             margin-bottom: 10px;
             padding: 10px 10px;
+            width: 100%;
             /* padding-right: 0px; */
             display: flex;
             gap: 10px;
@@ -175,6 +177,11 @@ require_once __DIR__ . '/../controllers/validarSesionBiblioteca.php';
             display: flex;
             align-items: center;
             justify-content: center;
+            @media (max-width: 700px) {
+            width: 90px;
+            height: 120px;
+            }
+
         }
 
         .bookItem h3 {
@@ -186,7 +193,7 @@ require_once __DIR__ . '/../controllers/validarSesionBiblioteca.php';
             margin-bottom: 0;
             margin-left: 10px;
 
-            @media (max-width: 600px) {
+            @media (max-width: 700px) {
                 font-size: 15px;
                 margin-left: 0px;
             }
@@ -208,7 +215,9 @@ require_once __DIR__ . '/../controllers/validarSesionBiblioteca.php';
             padding: 0;
             margin: 0;
             display: flex;
-            flex-direction: column;
+            /* flex-direction: column; */
+            align-items: center;
+
             gap: 5px;
         }
 
@@ -270,6 +279,52 @@ require_once __DIR__ . '/../controllers/validarSesionBiblioteca.php';
         #search button:hover {
             background-color: #009774;
         }
+    .iconLink{
+    text-decoration: none;
+    color: #223944;
+    }
+.icono-rotar {
+    display: none;
+    cursor:           pointer;
+    color: #223944;
+    font-size: 25px;
+    align-self: center;
+    transition: transform 0.35s ease;
+    @media (max-width: 1154px) {
+    display: inline-block;
+
+}
+
+}
+
+.rotado{
+    transform: rotate(180deg);
+
+}
+        #bookFormWrapper {
+            display: grid;
+            grid-template-rows: minmax(0, 1fr);
+            opacity: 1;
+            transition: grid-template-rows 0.35s ease, opacity 0.35s ease;
+        }
+
+        #bookFormWrapper.cerrado {
+            grid-template-rows: minmax(0, 0fr);
+            opacity: 0;
+        }
+
+        #bookFormWrapper > form {
+            height: auto;
+            min-height: 0;
+            overflow: hidden;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            #bookFormWrapper {
+                transition: none;
+            }
+        }
+
     </style>
     <article>
 
@@ -277,7 +332,8 @@ require_once __DIR__ . '/../controllers/validarSesionBiblioteca.php';
 
         <div id="newsControlContainer">
         <div id="formContainer">    
-        <form action="../controllers/crud_books.php" method="post">
+        <div id="bookFormWrapper">
+        <form action="../controllers/crud_books.php" method="post" id="bookForm">
 
                 <h3>Titulo</h3>
                 <input type="text" name="title" autofocus required=true placeholder="Titulo">
@@ -335,6 +391,8 @@ require_once __DIR__ . '/../controllers/validarSesionBiblioteca.php';
 
             </form>
         </div>
+            <i class="fa-solid fa-angle-up icono-rotar" onclick="rotarIcono(this); abrirFormulario('bookFormWrapper')"></i>
+        </div>
             <section id="books_container">
         <div id="search">
             <input type="text" id="searchInput" placeholder="Buscar por Título">
@@ -346,10 +404,11 @@ require_once __DIR__ . '/../controllers/validarSesionBiblioteca.php';
                     $result_tasks = $conn->query($query);
                     while ($row = $result_tasks->fetch(PDO::FETCH_ASSOC)) {?>
                 <div class="controlled_book">
+                    <a href="/U.E_Sto_Domingo_Anuncios-gestion_biblioteca/controllers/crud_books.php?delId=<?php echo (int) $row['id']; ?>" class="iconLink"><i class="fa-solid fa-trash"></i></a>
                     <div class="bookItem" >
                         <img src="<?php echo $row['img_url']; ?>" alt="Portada del Libro">
                         <div>
-                            <h3 class="book_title"><?php echo $row['title']; ?> <span>                <a href="/U.E_Sto_Domingo_Anuncios-gestion_biblioteca/controllers/crud_books.php?delId=<?php echo (int) $row['id']; ?>">🗑️</a></span></h3>
+                            <h3 class="book_title"><?php echo $row['title']; ?> </h3>
 
                             <h4>Autor: <?php echo $row['author']; ?></h4>
                             <h4>Editorial: <?php echo $row['publisher']; ?></h4>

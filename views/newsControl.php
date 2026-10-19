@@ -33,7 +33,7 @@
             border:   2px #658291 dashed;
             border-radius:            20px;
             width:                     80%;
-            height:                    85%;
+            min-height:                85%;
             background-color:    #c8f7cd;
             padding:             10px 15px;
             overflow-y:             scroll;
@@ -42,8 +42,9 @@
 
             @media (max-width: 600px){
                 /* grid-template-columns: 1fr; */
-                display: block;
-                height: auto;
+                display: flex;
+                flex-direction: column;
+                /* height: auto; */
             }
         }
         #newsControlContainer::-webkit-scrollbar {
@@ -194,6 +195,54 @@
             grid-template-rows: 1fr 1fr;
             place-items: center;
         }
+.iconLink{
+    text-decoration: none;
+    color: #223944;
+
+}
+        
+.icono-rotar {
+    display: none;
+    cursor:           pointer;
+    color: #223944;
+    font-size: 25px;
+    align-self: center;
+    transition: transform 0.35s ease;
+    @media (max-width: 1154px) {
+    display: inline-block;
+
+}
+
+}
+
+.rotado{
+    transform: rotate(180deg);
+
+}
+        #booksFormWrapper {
+            display: grid;
+            grid-template-rows   : minmax(0, 1fr);
+            opacity: 1;
+            transition: grid-template-rows 0.35s ease, opacity 0.35s ease;
+        }
+
+        #booksFormWrapper.cerrado {
+            grid-template-rows: minmax(0, 0fr);
+            opacity: 0;
+        }
+
+        #booksFormWrapper > form {
+            height: auto;
+            min-height: 0;
+            overflow: hidden;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            #booksFormWrapper {
+                transition: none;
+            }
+        }
+
 </style>
     <article>
 
@@ -201,7 +250,7 @@
 
         <div id="newsControlContainer">
             <div id="formContainer">
-                
+                <div id="booksFormWrapper">
                 <form action="../controllers/crud_news.php" method="post">
     
                     <h3>Titulo</h3>
@@ -218,6 +267,8 @@
                     <input id="botonSubmit" type="submit" name="save_announcement" value="Registrar Aviso" >
     
                 </form>
+                </div>
+            <i class="fa-solid fa-angle-up icono-rotar" onclick="rotarIcono(this); abrirFormulario('booksFormWrapper')"></i>
             </div>
 
             <section id="news_container">
@@ -234,8 +285,8 @@
                             </div>
                             <?php if (isset($_SESSION['username']) && $_SESSION['username'] === $row['author'] or $_SESSION['role'] === 'admin') { ?>
                                 <div class="controlled_new_buttons">
-                                    <a href="/U.E_Sto_Domingo_Anuncios-gestion_biblioteca/controllers/crud_news.php?delId=<?php echo $row['id']; ?>">🗑️</a>
-                                    <a href="/U.E_Sto_Domingo_Anuncios-gestion_biblioteca/controllers/crud_news.php?editId=<?php echo $row['id']; ?>">✏️</a>
+                                    <a href="/U.E_Sto_Domingo_Anuncios-gestion_biblioteca/controllers/crud_news.php?delId=<?php echo $row['id']; ?> "class="iconLink"><i class="fa-solid fa-trash"></i></a>
+                                    <a href="/U.E_Sto_Domingo_Anuncios-gestion_biblioteca/controllers/crud_news.php?editId=<?php echo $row['id']; ?>"class="iconLink"><i class="fa-solid fa-edit"></i></a>
                                 </div>
                             <?php } ?>                                    
 

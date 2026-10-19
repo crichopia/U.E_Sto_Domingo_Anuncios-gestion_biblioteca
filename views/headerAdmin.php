@@ -127,7 +127,7 @@
             border:                               2px #8abfb7 solid;
             border-radius:                                       25px;
             color:                                            white;
-            padding:                                          8px 20px;
+            padding:                                          8px 10px;
             display:                                         flex;
             flex-wrap:                                         wrap;
             font-size:                                           18px;
