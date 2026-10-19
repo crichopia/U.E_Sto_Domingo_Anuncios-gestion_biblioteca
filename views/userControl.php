@@ -204,7 +204,7 @@ require_once __DIR__ . '/../config/db.php';
                         <th>Usuario</th>
                         <th>Contraseña</th>
                         <th>Rol</th>
-                        <th>Actions</th>
+                        <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
