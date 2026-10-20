@@ -396,7 +396,7 @@ require_once __DIR__ . '/../controllers/validarSesionBiblioteca.php';
             <section id="books_container">
         <div id="search">
             <input type="text" id="searchInput" placeholder="Buscar por Título">
-            <button onclick="filtrarPorTitulo('searchInput', '.controlled_book', '.book_title')">Buscar</button>
+            <button onclick="filtrarPorTitulo('searchInput', '.controlled_book', '.book_title')"><i class="fa-solid fa-magnifying-glass"></i></button>
         </div>
         
             <?php

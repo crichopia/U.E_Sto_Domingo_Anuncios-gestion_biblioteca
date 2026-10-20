@@ -5,7 +5,7 @@
 <body>
     <?php include __DIR__ . '/../views/headerAdmin.php'; ?>
     <main id="main">
-        <?php include __DIR__ . '/../views/biblioteca.php'; ?>
+        <?php include __DIR__ . '/../views/bibliotecav2.php'; ?>
     </main>
     <?php include __DIR__ . '/../views/modalLogin.php'; ?>
     <?php include __DIR__ . '/../views/footer.php'; ?>

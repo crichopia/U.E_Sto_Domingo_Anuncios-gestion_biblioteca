@@ -152,7 +152,7 @@
             margin: 0;
         }
         #addNews {
-            padding:    5px 8px;
+            padding:    5px 5px;
             border:          none;
             border-radius:   25px;
             background: #009774;
@@ -161,7 +161,10 @@
             margin-bottom:   10px;
             font-size: 16px;
         }
-
+        .new_content{
+            text-align: justify;
+            padding:5px;
+        }
     </style>
 
     <article>
@@ -179,7 +182,7 @@
                 </select>
 
                 <?php if (isset($_SESSION['username'])) {?>
-                    <button id="addNews" onclick="window.location.href='/U.E_Sto_Domingo_Anuncios-gestion_biblioteca/adminDashboards/addNewsDashboard.php'">Nueva Noticia</button>
+                    <button id="addNews" onclick="window.location.href='/U.E_Sto_Domingo_Anuncios-gestion_biblioteca/adminDashboards/addNewsDashboard.php'"><i class="fa-solid fa-plus"></i></button>
                 <?php } ?>
 
                 <!-- <hr> -->

@@ -402,7 +402,7 @@ require_once __DIR__ . '/../controllers/validarSesionBiblioteca.php';
                 <button id="boton_Eliminar" class="controlarLibro hidden" type="button" onclick="eliminarLibroDelPrestamo('book_name', 'book_id'); cambiarBotonPrestamo('boton_Aniadir', 'boton_Eliminar');"><i class="fa-solid fa-minus"></i></button>
                 </div>
                 <input id="book_id" class="hidden" type="text" name="book_id" readonly >
-                <input id="botonSubmit" type="submit" name="save_loan" value="Registrar libro" >
+                <input id="botonSubmit" type="submit" name="save_loan" value="Registrar Prestamo" >
 
             </form>
         </div>

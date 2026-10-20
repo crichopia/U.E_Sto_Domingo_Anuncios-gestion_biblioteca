@@ -34,7 +34,7 @@
             grid-template-columns:                        1fr 1fr 1fr;
         }
 
-        nav{
+        .navLinks{
             box-sizing:         border-box;
             display:           flex;
             flex-wrap:         wrap;
@@ -140,6 +140,58 @@
         #admin-btn:hover{
             background: linear-gradient(135deg, #36b565, #00807b);
         }
+        .sessionIcon{
+            font-size: 30px;
+            color: white;
+            cursor: pointer;
+            @media (max-width: 800px){
+                font-size: 25px;
+            }
+        }
+
+        #icono-rotar {
+    display: none;
+    cursor:           pointer;
+    color: #fff;
+    font-size: 25px;
+    align-self: center;
+    transition: transform 0.35s ease;
+    @media (max-width: 1154px) {
+    display: inline-block;
+
+}
+
+}
+
+.rotado{
+    transform: rotate(180deg);
+
+}
+        #navWraper {
+            display: grid;
+            grid-template-rows: minmax(0, 1fr);
+            opacity: 1;
+            transition: grid-template-rows 0.35s ease, opacity 0.35s ease;
+        }
+
+        #navWraper.cerrado {
+            grid-template-rows: minmax(0, 0fr);
+            opacity: 0;
+        }
+
+        #navWraper > form {
+            height: auto;
+            min-height: 0;
+            overflow: hidden;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            #navWraper {
+                transition: none;
+            }
+        }
+
+
     </style>
 
     <header>
@@ -156,22 +208,29 @@
             </div>
             <?php
                 if (isset($_SESSION['username'])) {?>
-                    <button class="btnMenu" id="admin-btn" onclick="window.location.href='/U.E_Sto_Domingo_Anuncios-gestion_biblioteca/controllers/logout.php'">Cerrar Sesión</button>
+                    <i class="sessionIcon fa-solid fa-right-to-bracket"  onclick="window.location.href='/U.E_Sto_Domingo_Anuncios-gestion_biblioteca/controllers/logout.php'"></i>
             <?php } else {?>
-                    <button class="btnMenu" id="admin-btn" onclick="abrirModal('modal_login') ">Acceso Administrador</button>
+                    <i class="sessionIcon fa-solid fa-circle-user" onclick="abrirModal('modal_login')"></i>
             <?php } ?>
 
         </div>
-        <nav>
-            <a href="/U.E_Sto_Domingo_Anuncios-gestion_biblioteca/dashboards/newsDashboard.php">Noticias</a>
-            <a href="/U.E_Sto_Domingo_Anuncios-gestion_biblioteca/dashboards/bibliotecaDashboard.php">Biblioteca</a>
-            <a href="/U.E_Sto_Domingo_Anuncios-gestion_biblioteca/dashboards/recomenacionesDashboard.php">Páginas Recomendadas</a>
-            <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin' || isset($_SESSION['role']) && $_SESSION['role'] === 'bibliotecario') { ?>
-            <a href="/U.E_Sto_Domingo_Anuncios-gestion_biblioteca/adminDashboards/loansDashboard.php">Libros Prestados</a>
-            <?php } ?>
 
-            <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin') { ?>
-            <a href="/U.E_Sto_Domingo_Anuncios-gestion_biblioteca/adminDashboards/registerDashboard.php">Añadir Nuevo Usuario</a>
-            <?php } ?>
+        <nav>
+            <div id="navWraper">
+                <div class="navLinks">
+                    <a href="/U.E_Sto_Domingo_Anuncios-gestion_biblioteca/dashboards/newsDashboard.php">Noticias</a>
+                    <a href="/U.E_Sto_Domingo_Anuncios-gestion_biblioteca/dashboards/bibliotecaDashboard.php">Biblioteca</a>
+                    <a href="/U.E_Sto_Domingo_Anuncios-gestion_biblioteca/dashboards/recomenacionesDashboard.php">Páginas Recomendadas</a>
+                    <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin' || isset($_SESSION['role']) && $_SESSION['role'] === 'bibliotecario') { ?>
+                    <a href="/U.E_Sto_Domingo_Anuncios-gestion_biblioteca/adminDashboards/loansDashboard.php">Libros Prestados</a>
+                    <?php } ?>
+
+                    <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin') { ?>
+                    <a href="/U.E_Sto_Domingo_Anuncios-gestion_biblioteca/adminDashboards/registerDashboard.php">Añadir Nuevo Usuario</a>
+                    <?php } ?>
+                </div>
+            </div>
+            <i class="fa-solid fa-angle-up " id="icono-rotar" onclick="rotarIcono(this); abrirFormulario('navWraper')"></i>
+
         </nav>
     </header>

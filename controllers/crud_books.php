@@ -2,7 +2,7 @@
 require_once __DIR__ . '/validarSesionBiblioteca.php';
 require_once __DIR__ . '/../config/db.php';
 
-if (isset($_POST['save_announcement']) || isset($_POST['save_book'])) {
+if (isset($_POST['save_book'])) {
     $title = trim((string) ($_POST['title'] ?? ''));
     $author = trim((string) ($_POST['author'] ?? ''));
     $publisher = trim((string) ($_POST['publisher'] ?? ''));

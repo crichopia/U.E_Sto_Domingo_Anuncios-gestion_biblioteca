@@ -113,7 +113,7 @@
 
         }
         #addBooks {
-            padding:    5px 8px;
+            padding:    5px 5px;
             border:          none;
             border-radius:   25px;
             background: #009774;
@@ -121,9 +121,6 @@
             cursor:       pointer;
             margin-bottom:   10px;
             font-size: 16px;
-            @media (max-width: 600px){
-                font-size: 12px;
-            }
         }
         #search{
             display:          flex;
@@ -146,7 +143,7 @@
         #search button{
             text-align:          center;
             margin-bottom:         10px;
-            background-color: #87cead;
+            background-color: #009774;
             border-radius:         20px;
             padding:                5px 10px;
             border:                none;
@@ -196,13 +193,13 @@
             <h2>Consultar Biblioteca</h2>
             <?php if (isset($_SESSION['username'])) {?>
                 <?php if ($_SESSION['role'] === 'bibliotecario' or $_SESSION['role'] === 'admin') {?>
-                    <button id="addBooks" onclick="window.location.href='/U.E_Sto_Domingo_Anuncios-gestion_biblioteca/adminDashboards/addBooksDashboard.php'">Añadir Libros</button>
+                    <button id="addBooks" onclick="window.location.href='/U.E_Sto_Domingo_Anuncios-gestion_biblioteca/adminDashboards/addBooksDashboard.php'"><i class="fa-solid fa-plus"></i></button>
                 <?php } ?>
             <?php } ?>
         </div>
         <div id="search">
             <input type="text" id="searchInput" placeholder="Buscar por Título">
-            <button onclick="filtrarPorTitulo('searchInput', '.bookItem', '.book_title')">Buscar</button>
+            <button onclick="filtrarPorTitulo('searchInput', '.bookItem', '.book_title')"><i class="fa-solid fa-magnifying-glass"></i></button>
 
         </div>
 

@@ -195,30 +195,30 @@
             grid-template-rows: 1fr 1fr;
             place-items: center;
         }
-.iconLink{
-    text-decoration: none;
-    color: #223944;
+        .iconLink{
+            text-decoration: none;
+            color: #223944;
 
-}
-        
-.icono-rotar {
-    display: none;
-    cursor:           pointer;
-    color: #223944;
-    font-size: 25px;
-    align-self: center;
-    transition: transform 0.35s ease;
-    @media (max-width: 1154px) {
-    display: inline-block;
+        }
 
-}
+        .icono-rotar {
+            display: none;
+            cursor:           pointer;
+            color: #223944;
+            font-size: 25px;
+            align-self: center;
+            transition: transform 0.35s ease;
+            @media (max-width: 1154px) {
+            display: inline-block;
 
-}
+        }
 
-.rotado{
-    transform: rotate(180deg);
+        }
 
-}
+        .rotado{
+            transform: rotate(180deg);
+
+        }
         #booksFormWrapper {
             display: grid;
             grid-template-rows   : minmax(0, 1fr);
@@ -242,6 +242,15 @@
                 transition: none;
             }
         }
+        .normal{
+                background-color:        #b3e7d7;
+            }
+        .importante{
+                background-color:        #f9e98f;
+            }
+        .urgente{
+                background-color:        #e4a69b;
+            }
 
 </style>
     <article>
