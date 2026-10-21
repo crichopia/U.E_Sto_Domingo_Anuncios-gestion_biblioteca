@@ -64,10 +64,10 @@ $paginationUrl = htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '
         article{
             /* box-sizing:         border-box; */
             width:                 60vw;
-            height:                70vh;
+            height:                85dvh;
             background:       #b5e0c8;
             border: 2px #8abfb7 solid;
-            padding:                 5% 5%;
+            padding:                 3% 5%;
             margin-top:              5%;
             margin-bottom:           5%;
             border-radius:         20px;
@@ -369,13 +369,13 @@ $paginationUrl = htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '
             <?php if ($page > 1) {
                 $previousUrl = $paginationUrl . http_build_query($paginationParams + ['page' => $page - 1]);
             ?>
-                <a href="<?php echo htmlspecialchars($previousUrl, ENT_QUOTES, 'UTF-8'); ?>">Anterior</a>
+                <a style="padding: 2px 3px;" href="<?php echo htmlspecialchars($previousUrl, ENT_QUOTES, 'UTF-8'); ?>"><i class="fa-solid fa-arrow-left"></i></a>
             <?php } ?>
             <span><?php echo $totalBooks === 0 ? 'No hay libros' : 'Página ' . $page . ' de ' . $totalPages . ' (' . $totalBooks . ' libros)'; ?></span>
             <?php if ($page < $totalPages) {
                 $nextUrl = $paginationUrl . http_build_query($paginationParams + ['page' => $page + 1]);
             ?>
-                <a href="<?php echo htmlspecialchars($nextUrl, ENT_QUOTES, 'UTF-8'); ?>">Siguiente</a>
+                <a style="padding: 2px 3px;" href="<?php echo htmlspecialchars($nextUrl, ENT_QUOTES, 'UTF-8'); ?>"><i class="fa-solid fa-arrow-right"></i></a>
             <?php } ?>
         </nav>
     </article>

@@ -573,12 +573,12 @@ $paginationUrl = htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '
                 <?php if ($page > 1) {
                     $previousUrl = $paginationUrl . http_build_query($paginationParams + ['page' => $page - 1]);
                 ?>
-                    <a href="<?php echo htmlspecialchars($previousUrl, ENT_QUOTES, 'UTF-8'); ?>">Anterior</a>
+                    <a style="padding: 2px 3px;" href="<?php echo htmlspecialchars($previousUrl, ENT_QUOTES, 'UTF-8'); ?>"><i class="fa-solid fa-arrow-left"></i></a>
                 <?php } ?>
                 <?php if ($page < $totalPages) {
                     $nextUrl = $paginationUrl . http_build_query($paginationParams + ['page' => $page + 1]);
                 ?>
-                    <a href="<?php echo htmlspecialchars($nextUrl, ENT_QUOTES, 'UTF-8'); ?>">Siguiente</a>
+                    <a style="padding: 2px 3px;" href="<?php echo htmlspecialchars($nextUrl, ENT_QUOTES, 'UTF-8'); ?>"><i class="fa-solid fa-arrow-right"></i></a>
                 <?php } ?>
             </nav>
             </section>
