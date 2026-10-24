@@ -43,7 +43,7 @@
             gap:               5px;
         }
 
-        nav a{
+        .navLinks a{
             text-decoration:         none;
             color:                 #fff;
             display:                flex;
@@ -55,7 +55,7 @@
             transition:     all 0.3s ease;
         }
 
-        nav a:hover{
+        .navLinks a:hover{
             background-color: #71f9b1;
             color:#fff;
             scale: 1.1;
@@ -144,9 +144,9 @@
             font-size: 30px;
             color: white;
             cursor: pointer;
-            @media (max-width: 800px){
+            /* @media (max-width: 800px){
                 font-size: 25px;
-            }
+            } */
         }
 
         #icono-rotar {
@@ -226,7 +226,7 @@
                     <?php } ?>
 
                     <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin') { ?>
-                    <a href="/U.E_Sto_Domingo_Anuncios-gestion_biblioteca/adminDashboards/registerDashboard.php">Añadir Nuevo Usuario</a>
+                    <a href="/U.E_Sto_Domingo_Anuncios-gestion_biblioteca/adminDashboards/registerDashboard.php">Gestionar Usuarios</a>
                     <?php } ?>
                 </div>
             </div>

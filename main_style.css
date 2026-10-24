@@ -48,6 +48,10 @@ body{
 .hidden {
     display: none;
 }
+.subrayado {
+    text-decoration: underline;
+    scale: 1.1;
+}
 
 .centerTheDamnButton{
     display:                             flex;

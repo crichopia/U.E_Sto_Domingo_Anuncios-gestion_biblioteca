@@ -21,7 +21,7 @@ require_once __DIR__ . '/../config/db.php';
             flex-direction:      column;
             justify-content:     center;
             align-items:         center;
-            @media (max-width: 600px) {
+            @media (max-width: 1154px) {
                 width:       80vw;
                 margin-top:    2%;
                 margin-bottom: 2%;
@@ -42,7 +42,7 @@ require_once __DIR__ . '/../config/db.php';
             -ms-overflow-style:       none;    /* IE 10+ */
             scrollbar-width:          none;       /* Firefox */
 
-            @media (max-width: 600px){
+            @media (max-width: 1154px){
                 grid-template-columns: 1fr;
             }
         }
@@ -56,46 +56,60 @@ require_once __DIR__ . '/../config/db.php';
             margin-bottom: 10px;
         }
 
-        table{
-            /* display: flex;
-            flex-direction: column; */
-            background-color: aliceblue;
+        .users-list {
+            display: grid;
+            align-content: start;
+            gap: 10px;
+        }
+
+        .user-card {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 12px 16px;
             border: 2px #658291 solid;
-            border-radius:         20px;
-            padding: 5px;
-            @media (max-width: 600px){
-                font-size: 12px;
-                padding: 2px;
-            }
-
+            border-radius: 16px;
+            background-color: aliceblue;
+            color: #223944;
         }
 
-        thead th{
-            min-height:                   40px;
-            height:                       40px;
-            padding:                  8px 10px;
-            border-bottom: 2px #658291 solid;
-            border-right:  2px #658291 solid;
-            box-sizing:             border-box;
-
-            @media (max-width: 600px){
-                font-size: 12px;
-            padding:   5px 8px;
-            }
-
+        .user-info {
+            min-width: 0;
+            display: grid;
+            gap: 5px;
         }
 
-        tbody td{
-            border-right: 2px #658291 solid;
-            padding: 8px;
+        .user-info h3,
+        .user-info p {
+            margin: 0;
+            overflow-wrap: anywhere;
         }
 
-        tr th:last-child{
-            border-right: none;
+        .user-info h3 {
+            font-size: 17px;
         }
 
-        tbody td:last-child{
-            border-right: none;
+        .user-info p {
+            font-size: 14px;
+        }
+
+        .user-actions {
+            display: flex;
+            flex-shrink: 0;
+            gap: 12px;
+        }
+
+        .user-actions a {
+            font-size: 18px;
+        }
+
+        .empty-users {
+            margin: 0;
+            padding: 12px;
+            border-radius: 12px;
+            background-color: aliceblue;
+            color: #223944;
         }
 
         form{
@@ -108,7 +122,7 @@ require_once __DIR__ . '/../config/db.php';
             justify-content:     center;
             gap: 10px;
             /* align-items:         center; */
-            @media (max-width: 600px){
+            @media (max-width: 1154px){
                 width: 90%;
             }
 
@@ -118,6 +132,7 @@ require_once __DIR__ . '/../config/db.php';
             flex-direction:      column;
             justify-content:     center;
             align-items:         center;
+            width:                 100%;
         }
 
         form h3{
@@ -132,15 +147,9 @@ require_once __DIR__ . '/../config/db.php';
             margin-bottom: 10px;
             padding:        5px;
             width:          90%;
-            @media (max-width: 600px){
-                width: 55vw;
-            }
 
         }
 
-        table a{
-            text-decoration: none;
-        }
         select{
             text-align:          center;
             margin-bottom:         10px;
@@ -149,21 +158,15 @@ require_once __DIR__ . '/../config/db.php';
             padding:                5px;
             border:                none;
             color:               #fff;
-            width:                  96%;
+            width:                  90%;
             /* font-weight:           bold; */
-            @media (max-width: 600px){
-                width: 57vw;
-            }
 
         }
 
         #botonSubmit{
             background: linear-gradient(135deg, #51e070, #009774);
             color: #fff;
-            width:                  96%;
-            @media (max-width: 600px){
-                width: 57vw;
-            }
+            width:                  90%;
 
         }
 
@@ -172,6 +175,48 @@ require_once __DIR__ . '/../config/db.php';
     color: #223944;
 
 }
+.icono-rotar {
+    display: none;
+    cursor:           pointer;
+    color: #223944;
+    font-size: 25px;
+    align-self: center;
+    transition: transform 0.35s ease;
+    @media (max-width: 1154px) {
+    display: inline-block;
+
+}
+
+}
+
+.rotado{
+    transform: rotate(180deg);
+
+}
+        #userFormWrapper {
+            display: grid;
+            grid-template-rows: minmax(0, 1fr);
+            opacity: 1;
+            transition: grid-template-rows 0.35s ease, opacity 0.35s ease;
+            width: 100%;
+        }
+
+        #userFormWrapper.cerrado {
+            grid-template-rows: minmax(0, 0fr);
+            opacity: 0;
+        }
+
+        #userFormWrapper > form {
+            height: auto;
+            min-height: 0;
+            overflow: hidden;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            #userFormWrapper {
+                transition: none;
+            }
+        }
 
 </style>
     <article>
@@ -180,7 +225,8 @@ require_once __DIR__ . '/../config/db.php';
 
         <div id="userControlContainer">
             
-        <div id="formContainer">    
+        <div id="formContainer">
+        <div id="userFormWrapper">
         <form action="../controllers/crud_register.php" method="post">
 
                 <h3>Usuario</h3>
@@ -198,40 +244,29 @@ require_once __DIR__ . '/../config/db.php';
 
             </form>
         </div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Usuario</th>
-                        <th>Contraseña</th>
-                        <th>Rol</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
+            <i class="fa-solid fa-angle-up icono-rotar" onclick="rotarIcono(this); abrirFormulario('userFormWrapper')"></i>
+        </div>
+            <div class="users-list">
+                <?php
+                    $query = 'SELECT id, username, password, role FROM user_data';
+                    $result_tasks = $conn->query($query);
 
-                    <?php 
-                        $query = "SELECT * FROM user_data";
-                        $result_tasks = $conn->query($query);
-
-                        while ($row = $result_tasks->fetch(PDO::FETCH_ASSOC)) {?>
-                        
-                            <tr class="dataUser">
-                                <td><?php echo $row['username']?></td>
-                                <td><?php echo $row['password']?></td>
-                                <td><?php echo $row['role']?></td>
-                                <td>
-                                    <?php if (strtolower($row['role']) !== 'admin') { ?>
-                                        <a href="/U.E_Sto_Domingo_Anuncios-gestion_biblioteca/controllers/crud_register.php?delId=<?php echo $row['id']; ?>" class="iconLink"><i class="fa-solid fa-trash"></i></a>
-                                        <a href="/U.E_Sto_Domingo_Anuncios-gestion_biblioteca/controllers/crud_register.php?editId=<?php echo $row['id']; ?>" class="iconLink"><i class="fa-solid fa-edit"></i></a>
-                                    <?php } ?>                                    
-                                </td>
-
-                            </tr>
-                        
+                    while ($row = $result_tasks->fetch(PDO::FETCH_ASSOC)) {
+                ?>
+                    <section class="user-card">
+                        <div class="user-info">
+                            <h3><?php echo htmlspecialchars($row['username'], ENT_QUOTES, 'UTF-8'); ?></h3>
+                            <p><strong>Rol:</strong> <?php echo htmlspecialchars($row['role'], ENT_QUOTES, 'UTF-8'); ?></p>
+                            <p><strong>Contraseña: </strong><?php echo htmlspecialchars($row['password'], ENT_QUOTES, 'UTF-8'); ?></p>
+                        </div>
+                        <?php if (strtolower($row['role']) !== 'admin') { ?>
+                            <div class="user-actions">
+                                <a href="/U.E_Sto_Domingo_Anuncios-gestion_biblioteca/controllers/crud_register.php?delId=<?php echo (int) $row['id']; ?>" class="iconLink" aria-label="Eliminar usuario <?php echo htmlspecialchars($row['username'], ENT_QUOTES, 'UTF-8'); ?>"><i class="fa-solid fa-trash"></i></a>
+                                <a href="/U.E_Sto_Domingo_Anuncios-gestion_biblioteca/controllers/crud_register.php?editId=<?php echo (int) $row['id']; ?>" class="iconLink" aria-label="Editar usuario <?php echo htmlspecialchars($row['username'], ENT_QUOTES, 'UTF-8'); ?>"><i class="fa-solid fa-edit"></i></a>
+                            </div>
                         <?php } ?>
-                    
-
-                </tbody>
-            </table>
+                    </section>
+                <?php } ?>
+            </div>
         </div>
     </article>

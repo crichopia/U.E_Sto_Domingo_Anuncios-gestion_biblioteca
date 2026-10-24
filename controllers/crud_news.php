@@ -53,6 +53,7 @@ if (isset($_POST['update'])){
 }
 
 ?>
+<?php require_once '../views/html-head.php' ?>
 
 <?php include __DIR__ . '/../views/headerAdmin.php'; ?>
 <head>
@@ -174,10 +175,10 @@ if (isset($_POST['update'])){
             padding:        5px;
             resize: none;
             width:          90%;
-            height:         100px;
+            min-height:         100px;
             @media (max-width: 600px){
                 width: 55vw;
-                height: 60px;
+                min-height: 100px;
             }
         }
 
@@ -210,4 +211,6 @@ if (isset($_POST['update'])){
         </div>
     </article>
 </body>
-</html><?php include __DIR__ . '/../views/footer.php'; ?>
+</html>
+<?php include __DIR__ . '/../views/footer.php'; ?>
+<?php require_once '../views/html-footer.php' ?>

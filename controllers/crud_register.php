@@ -48,7 +48,7 @@ if (isset($_POST['update'])){
 
 ?>
 
-<?php //a partir de aqui solo es un formpulario ?>
+<?php require_once '../views/html-head.php' ?>
 
 <head>
     <title>actualizar datos</title>
@@ -118,7 +118,7 @@ if (isset($_POST['update'])){
             flex-direction:      column;
             justify-content:     center;
             width: 55%;
-            height: 80%;
+            height: max-content;
             /* align-items:         center; */
             @media (max-width: 600px){
                 width: 90%;
@@ -190,4 +190,6 @@ if (isset($_POST['update'])){
         </div>
     </article>
 </body>
-</html><?php include __DIR__ . '/../views/footer.php'; ?>
+</html>
+<?php include __DIR__ . '/../views/footer.php'; ?>
+<?php require_once '../views/html-footer.php' ?>

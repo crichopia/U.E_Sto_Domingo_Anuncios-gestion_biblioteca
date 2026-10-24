@@ -7,7 +7,7 @@
         box-sizing:         border-box;
         }
 
-        article{
+        .news_panel{
             width:                 60vw;
             height:                70vh;
             background:       #b5e0c8;
@@ -27,7 +27,7 @@
                 margin-bottom: 2%;
             }
         }
-        article h2{
+        .news_panel h2{
             margin:           0;
             color:    #223944;
             margin-bottom: 10px;
@@ -117,39 +117,104 @@
 
 
         .news_item {
-            border:       2px #658291 dashed;
-            border-radius:                25px;
-            margin-bottom:                10px;
-            padding:                 10px 10px;
+            --importance-color: #76b9a4;
+            /* display: grid;
+            grid-template-columns: 42px minmax(0, 1fr); */
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 12px;
+            padding: 14px;
+            border: 1px solid #d8e4e7;
+            border-left: 4px solid var(--importance-color);
+            border-radius: 14px;
+            background: #fff;
+            box-shadow: 0 2px 6px rgba(34, 57, 68, 0.08);
         }
 
-        .news_ite .hidden{
-            display: none;
-        }
-        
-        .normal{
-                background-color:        #b3e7d7;
-            }
-        .importante{
-                background-color:        #f9e98f;
-            }
-        .urgente{
-                background-color:        #e4a69b;
-            }
-
-        .news_item hr{
-            color:            #658291;
-            background-color: #658291;
-            /* height: 1px; */
+        .news_avatar {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: #d9f2e8;
+            color: #08785f;
+            font-size: 18px;
         }
 
-        .news_item h3{
-            margin:           0;
-            margin-bottom: 5px ;
+        .news_item.normal {
+            --importance-color: #58a98d;
         }
 
-        .news_item h4{
+        .news_item.importante {
+            --importance-color: #e1b52c;
+        }
+
+        .news_item.urgente {
+            --importance-color: #d66c5d;
+        }
+
+        .news_item.normal .news_importance {
+            background: #e2f3ed;
+        }
+
+        .news_item.importante .news_importance {
+            background: #fff5cc;
+        }
+
+        .news_item.urgente .news_importance {
+            background: #fbe5e1;
+        }
+
+        .news_item_body {
+            min-width: 0;
+        }
+
+        .news_item_header {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            gap: 4px 8px;
+            margin-bottom: 8px;
+        }
+
+        .news_item_header h3 {
             margin: 0;
+            color: #223944;
+            font-size: 16px;
+        }
+
+        .news_item_header time {
+            color: #6d7f87;
+            font-size: 13px;
+        }
+
+        .news_item_body h4 {
+            margin: 0 0 6px;
+            color: #223944;
+            font-size: 18px;
+        }
+
+        .news_content {
+            margin: 0;
+            padding: 0;
+            text-align: justify;
+            color: #344b55;
+            line-height: 1.5;
+            white-space: pre-wrap;
+            overflow-wrap: anywhere;
+        }
+
+        .news_importance {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 3px 9px;
+            border-radius: 999px;
+            color: #344b55;
+            font-size: 12px;
+            font-weight: bold;
         }
         #addNews {
             padding:    5px 5px;
@@ -161,13 +226,9 @@
             margin-bottom:   10px;
             font-size: 16px;
         }
-        .new_content{
-            text-align: justify;
-            padding:5px;
-        }
     </style>
 
-    <article>
+    <article class="news_panel">
         <h2>Noticias</h2>
 
         <div id="news_box">
@@ -194,12 +255,23 @@
                     $result_tasks = $conn->query($query);
 
                     while ($row = $result_tasks->fetch(PDO::FETCH_ASSOC)) {?>
-                        <div class="news_item <?php echo $row['importance']; ?>">
-                            <h3 class="new_title" id="title_new-1"><?php echo $row['title']; ?></h3>
-                            <h4><span id="new_author"><?php echo $row['author']; ?></span> <span id="new_date"><?php echo $row['announcement_date']; ?></span></h4>
-                            <hr>
-                            <p class="new_content" id="new-1_content"><?php echo $row['content']; ?></p>
-                        </div>
+                        <?php
+                            $importance = in_array($row['importance'], ['normal', 'importante', 'urgente'], true)
+                                ? $row['importance']
+                                : 'normal';
+                        ?>
+                        <article class="news_item <?php echo htmlspecialchars($importance, ENT_QUOTES, 'UTF-8'); ?>">
+                            <div class="news_item_body">
+                                <div class="news_item_header">
+                                    <span class="news_avatar" aria-hidden="true"><i class="fa-solid fa-user"></i></span>
+                                    <h3><?php echo htmlspecialchars($row['author'], ENT_QUOTES, 'UTF-8'); ?></h3>
+                                    <time><?php echo htmlspecialchars($row['announcement_date'], ENT_QUOTES, 'UTF-8'); ?></time>
+                                    <span class="news_importance"><?php echo ucfirst(htmlspecialchars($importance, ENT_QUOTES, 'UTF-8')); ?></span>
+                                </div>
+                                <h4><?php echo htmlspecialchars($row['title'], ENT_QUOTES, 'UTF-8'); ?></h4>
+                                <p class="news_content"><?php echo htmlspecialchars($row['content'], ENT_QUOTES, 'UTF-8'); ?></p>
+                            </div>
+                        </article>
                 <?php } ?>
 
             </section>

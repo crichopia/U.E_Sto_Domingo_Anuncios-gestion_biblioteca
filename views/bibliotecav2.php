@@ -75,7 +75,7 @@ $paginationUrl = htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '
             flex-direction:      column;
             /* justify-content:     center; */
             align-items:         center;
-            @media (max-width: 800px) {
+            @media (max-width: 1154px) {
                 width:       80vw;
                 margin-top:    2%;
                 margin-bottom: 2%;
@@ -96,7 +96,7 @@ $paginationUrl = htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '
 
             border: 2px #658291 dashed;
             border-radius:          20px;
-            height:              65%;
+            height:              80%;
             background-color:  #c8f7cd;
             padding:           10px 20px;
             overflow-y:           scroll;
@@ -118,17 +118,15 @@ $paginationUrl = htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '
         }
 
         .bookItem {
-            border:       2px #658291 dashed;
-            background-color:        #b3e7d7;
-            border-radius:                25px;
-            margin-bottom:                10px;
-            padding:                 10px 10px;
-            display:                      flex;
-            height:min-content;
-            gap:                          10px;
-            align-items:                center;
-            color:                   #223944;
-
+            border: 2px #658291 dashed;
+            border-radius: 20px;
+            margin-bottom: 10px;
+            padding: 12px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            color: #223944;
+            height: max-content;
         }
         .bookItem.hidden {
             display: none;
@@ -137,29 +135,77 @@ $paginationUrl = htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '
             background-color:        #b3e7d7;
         }
         .bookItem.disponiblent {
-            background-color:        #e4a69b;
+            background-color:        #fdc9c0;
         }
 
-        .bookItem img{
-            min-width:             110px;
-            height:            150px;
-            border-radius:      10px;
+        .bookItem .book-cover {
+            flex: 0 0 110px;
+            height: 150px;
+            border-radius: 10px;
             background-color: #fff;
-            display:            flex;
-            align-items:      center;
-            justify-content:  center;
-            @media (max-width: 700px) {
-            max-width: 70px;
+            overflow: hidden;
+        }
+        .bookItem .book-cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .bookItem .book-content {
+            flex: 1;
+            min-width: 0;
+        }
+        .bookItem .book_title {
+            margin: 0 0 8px;
+            font-size: 20px;
+            line-height: 1.3;
+        }
+        .bookItem .book-details {
+            display: grid;
+            gap: 2px;
+        }
+        .bookItem .book-details h3 {
+            margin: 0;
+            font-size: 16px;
+            font-weight: 500;
+            line-height: 1.4;
+        }
+        .bookItem .book-details strong {
+            display: inline-block;
+            min-width: 100px;
+            font-weight: 700;
+        }
+        .bookItem .book-status {
+            display: inline-flex;
+            width: max-content;
+            margin-top: 8px !important;
+            padding: 4px 10px;
+            border-radius: 999px;
+            background: rgba(34, 57, 68, 0.08);
+            font-size: 12.8px !important;
+            font-weight: 700 !important;
+        }
+        .bookItem.disponible .book-status {
+            color: #0f6f52;
+            background: rgba(0, 151, 116, 0.14);
+        }
+        .bookItem.disponiblent .book-status {
+            color: #9d2d22;
+            background: rgba(196, 78, 60, 0.12);
+        }
+        @media (max-width: 700px) {
+            .bookItem {
+                align-items: flex-start;
+                gap: 10px;
+                padding: 10px;
             }
-
-        }
-        .bookItem h3{
-            margin: 10px;
-        }
-        .bookItem h4{
-            margin-top: 0;
-            margin-bottom: 0;
-            margin-left: 10px;
+            .bookItem .book-cover {
+                flex-basis: 78px;
+                height: 108px;
+            }
+            .bookItem .book-details strong {
+                min-width: 76px;
+            }
         }
         #titulo{
             display:                  flex;
@@ -347,19 +393,23 @@ $paginationUrl = htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '
         </form>
         <section id="booksContainer">
             <?php
-                foreach ($books as $row) {?>
+                foreach ($books as $row) {
+                    $isAvailable = (int) $row['num_copies'] > 0;
+            ?>
             <div class="bookItem <?php echo ((int) $row['num_copies'] > 0) ? 'disponible' : 'disponiblent'; ?>" data-year="<?php echo htmlspecialchars($row['year'], ENT_QUOTES, 'UTF-8'); ?>" data-materia="<?php echo htmlspecialchars($row['materia'], ENT_QUOTES, 'UTF-8'); ?>">
-                <img src="<?php echo htmlspecialchars($row['img_url'], ENT_QUOTES, 'UTF-8'); ?>" alt="Portada del Libro">
-                <div>
-                    <h3 class="book_title"><?php echo htmlspecialchars($row['title'], ENT_QUOTES, 'UTF-8'); ?></h3>
-
-                    <h4>Autor: <?php echo htmlspecialchars($row['author'], ENT_QUOTES, 'UTF-8'); ?></h4>
-                    <!-- <h4>editorial: <?php echo $row['publisher']; ?></h4> -->
-                    <h4>Año: <?php echo htmlspecialchars($row['year'], ENT_QUOTES, 'UTF-8'); ?></h4>
-                    <h4>Materia: <span><?php echo htmlspecialchars($row['materia'], ENT_QUOTES, 'UTF-8'); ?></span></h4>
-                    </h4>
-                    <h4> Numero de Copias: <span><?php echo htmlspecialchars((string) $row['num_copies'], ENT_QUOTES, 'UTF-8'); ?></span></h4>
-                    <h4>Estado:<span><?php echo ((int) $row['num_copies'] > 0) ? 'disponible' : 'no disponible'; ?></span></h4>
+                <div class="book-cover">
+                    <img src="<?php echo htmlspecialchars($row['img_url'], ENT_QUOTES, 'UTF-8'); ?>" alt="Portada del libro <?php echo htmlspecialchars($row['title'], ENT_QUOTES, 'UTF-8'); ?>">
+                </div>
+                <div class="book-content">
+                    <h2 class="book_title"><?php echo htmlspecialchars($row['title'], ENT_QUOTES, 'UTF-8'); ?></h2>
+                    <div class="book-details">
+                        <h3><strong>Autor:</strong> <?php echo htmlspecialchars($row['author'], ENT_QUOTES, 'UTF-8'); ?></h3>
+                        <h3><strong>Editorial:</strong> <?php echo htmlspecialchars($row['publisher'], ENT_QUOTES, 'UTF-8'); ?></h3>
+                        <h3><strong>Año:</strong> <?php echo htmlspecialchars($row['year'], ENT_QUOTES, 'UTF-8'); ?></h3>
+                        <h3><strong>Materia:</strong> <?php echo htmlspecialchars($row['materia'], ENT_QUOTES, 'UTF-8'); ?></h3>
+                        <h3><strong>Copias:</strong> <?php echo htmlspecialchars((string) $row['num_copies'], ENT_QUOTES, 'UTF-8'); ?></h3>
+                        <h3 class="book-status"><?php echo $isAvailable ? 'Disponible' : 'No disponible'; ?></h3>
+                    </div>
                 </div>
             </div>
             <?php } ?>

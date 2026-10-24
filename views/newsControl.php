@@ -19,7 +19,7 @@
             flex-direction:      column;
             justify-content:     center;
             align-items:         center;
-            @media (max-width: 600px) {
+            @media (max-width: 850px) {
                 width:       80vw;
                 margin-top:    2%;
                 margin-bottom: 2%;
@@ -40,7 +40,7 @@
             -ms-overflow-style:       none;    /* IE 10+ */
             scrollbar-width:          none;       /* Firefox */
 
-            @media (max-width: 600px){
+            @media (max-width: 1154px){
                 /* grid-template-columns: 1fr; */
                 display: flex;
                 flex-direction: column;
@@ -61,6 +61,7 @@
             flex-direction:      column;
             justify-content:     center;
             align-items:         center;
+            width:100%;
         }
         form{
             background-color: #b5e0c8;
@@ -71,10 +72,9 @@
             flex-direction:      column;
             justify-content:     center;
             height:min-content;
-            /* align-items:         center; */
-            @media (max-width: 600px){
-                width: 90%;
-                margin-bottom: 10px;
+            margin-bottom: 10px;
+            @media (max-width: 1154px){
+                width: 80%;
             }
 
         }
@@ -90,10 +90,6 @@
             border-radius: 20px;
             margin-bottom: 10px;
             padding:        5px;
-            width:          90%;
-            @media (max-width: 600px){
-                width: 55vw;
-            }
         }
 
         form textarea{
@@ -101,13 +97,9 @@
             border-radius: 20px;
             margin-bottom: 10px;
             padding:        5px;
-            resize: none;
-            width:          90%;
-            height:         100px;
-            @media (max-width: 600px){
-                width: 55vw;
-                height: 60px;
-            }
+            resize:        none;
+            /* width:         100%; */
+            height:       100px;
         }
         select{
             text-align:          center;
@@ -117,22 +109,14 @@
             padding:                5px;
             border:                none;
             color:               #fff;
-            width:                  96%;
-            /* font-weight:           bold; */
-            @media (max-width: 600px){
-                width: 57vw;
-            }
+            width:                  100%;
 
         }
 
         #botonSubmit{
             background: linear-gradient(135deg, #51e070, #009774);
             color: #fff;
-            width:                  96%;
-            @media (max-width: 600px){
-                width: 57vw;
-            }
-
+            width:                  100%;
         }
         #news_container{
             display:                flex;
@@ -152,27 +136,103 @@
         }
 
         .news_item {
-            border:       2px #658291 dashed;
-            background-color:        #b3e7d7;
-            border-radius:                25px;
-            margin-bottom:                10px;
-            padding:                 10px 10px;
-            max-width:                100%;
+            --importance-color: #76b9a4;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 12px;
+            padding: 14px;
+            border: 1px solid #d8e4e7;
+            border-left: 4px solid var(--importance-color);
+            border-radius: 14px;
+            background: #fff;
+            box-shadow: 0 2px 6px rgba(34, 57, 68, 0.08);
+            max-width: 100%;
         }
 
-        .news_item hr{
-            color:            #658291;
-            background-color: #658291;
-            /* height: 1px; */
+        .news_avatar {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 42px;
+            height: 42px;
+            flex: 0 0 42px;
+            border-radius: 50%;
+            background: #d9f2e8;
+            color: #08785f;
+            font-size: 18px;
         }
 
-        .news_item h3{
-            margin:           0;
-            margin-bottom: 5px ;
+        .news_item.normal {
+            --importance-color: #58a98d;
         }
 
-        .news_item h4{
+        .news_item.importante {
+            --importance-color: #e1b52c;
+        }
+
+        .news_item.urgente {
+            --importance-color: #d66c5d;
+        }
+
+        .news_item.normal .news_importance {
+            background: #e2f3ed;
+        }
+
+        .news_item.importante .news_importance {
+            background: #fff5cc;
+        }
+
+        .news_item.urgente .news_importance {
+            background: #fbe5e1;
+        }
+
+        .news_item_body {
+            min-width: 0;
+        }
+
+        .news_item_header {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+
+        .news_item_header h3 {
             margin: 0;
+            color: #223944;
+            font-size: 16px;
+        }
+
+        .news_item_header time {
+            color: #6d7f87;
+            font-size: 13px;
+        }
+
+        .news_item_body h4 {
+            margin: 0 0 6px;
+            color: #223944;
+            font-size: 18px;
+        }
+
+        .news_content {
+            margin: 0;
+            padding: 0;
+            color: #344b55;
+            line-height: 1.5;
+            white-space: pre-wrap;
+            overflow-wrap: anywhere;
+        }
+
+        .news_importance {
+            display: inline-block;
+            margin-left: auto;
+            padding: 3px 9px;
+            border-radius: 999px;
+            color: #344b55;
+            font-size: 12px;
+            font-weight: bold;
         }
 
         .controlled_new{
@@ -221,6 +281,8 @@
         }
         #booksFormWrapper {
             display: grid;
+            place-items: center;
+            width: 100%;
             grid-template-rows   : minmax(0, 1fr);
             opacity: 1;
             transition: grid-template-rows 0.35s ease, opacity 0.35s ease;
@@ -242,16 +304,6 @@
                 transition: none;
             }
         }
-        .normal{
-                background-color:        #b3e7d7;
-            }
-        .importante{
-                background-color:        #f9e98f;
-            }
-        .urgente{
-                background-color:        #e4a69b;
-            }
-
 </style>
     <article>
 
@@ -286,11 +338,22 @@
                     $result_tasks = $conn->query($query);
                     while ($row = $result_tasks->fetch(PDO::FETCH_ASSOC)) {?>
                         <div class="controlled_new">
-                            <div class="news_item <?php echo $row['importance']; ?>">
-                                <h3 class="new_title" id="title_new-1"><?php echo $row['title']; ?></h3>
-                                <h4><span id="new_author"><?php echo $row['author']; ?></span> <span id="new_date"><?php echo $row['announcement_date']; ?></span></h4>
-                                <hr>
-                                <p class="new_content" id="new-1_content"><?php echo $row['content']; ?></p>
+                            <?php
+                                $importance = in_array($row['importance'], ['normal', 'importante', 'urgente'], true)
+                                    ? $row['importance']
+                                    : 'normal';
+                            ?>
+                            <div class="news_item <?php echo htmlspecialchars($importance, ENT_QUOTES, 'UTF-8'); ?>">
+                                <div class="news_item_body">
+                                    <div class="news_item_header">
+                                        <span class="news_avatar" aria-hidden="true"><i class="fa-solid fa-user"></i></span>
+                                        <h3><?php echo htmlspecialchars($row['author'], ENT_QUOTES, 'UTF-8'); ?></h3>
+                                        <time><?php echo htmlspecialchars($row['announcement_date'], ENT_QUOTES, 'UTF-8'); ?></time>
+                                        <span class="news_importance"><?php echo ucfirst(htmlspecialchars($importance, ENT_QUOTES, 'UTF-8')); ?></span>
+                                    </div>
+                                    <h4><?php echo htmlspecialchars($row['title'], ENT_QUOTES, 'UTF-8'); ?></h4>
+                                    <p class="news_content"><?php echo htmlspecialchars($row['content'], ENT_QUOTES, 'UTF-8'); ?></p>
+                                </div>
                             </div>
                             <?php if (isset($_SESSION['username']) && $_SESSION['username'] === $row['author'] or $_SESSION['role'] === 'admin') { ?>
                                 <div class="controlled_new_buttons">
