@@ -2,7 +2,7 @@
 require __DIR__ . '/../vendor/autoload.php';
 
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/..'); 
-$dotenv->load();
+$dotenv->safeLoad();
 
 $conn = new PDO(
     "pgsql:host={$_ENV['DB_HOST']};port={$_ENV['DB_PORT']};dbname={$_ENV['DB_NAME']}",
