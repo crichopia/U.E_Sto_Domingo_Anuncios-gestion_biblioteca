@@ -43,7 +43,7 @@
 </head>
 <body>
     <article>
-        <img src="../assets/working.png" alt="Work in progress">
+        <img src="/public/assets/working.png" alt="Work in progress">
         <h1>Work in Progress</h1>
         <p>This page is currently under construction. Open the menu for more options.</p>
     </article>

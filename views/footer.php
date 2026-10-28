@@ -1,9 +1,3 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
     <style>
 
         body {
@@ -17,28 +11,33 @@
         footer{
             background: linear-gradient(135deg, #51e070, #009774);
             display:                                             flex;
-            padding-left:                                          3%;
-            padding-right:                                         3%;
+            flex-direction:                                    column;
+            gap:                                                 10px;
             align-items:                                       center;
             justify-content:                                   center;
+            padding:                                             30px;
             width:                                               100%;
-            height:                                             100px;
             box-sizing:                                    border-box;
             color:                                             #fff;
             margin-top:                                          auto;
         }
 
+        footer p {
+            text-align: center;
+        }
+
         footer a{
             color: rgb(129, 2, 154);
+            font-size: 25px;
         }
 
     </style>
 
 
-</head>
-<body>
         <footer>
-            <p>Unidad educativa santo domingo de guzman -2026   <a href="https://github.com/crichopia/U.E_Sto_Domingo_Anuncios-gestion_biblioteca" target="_blank">repositorio</a></p>
+            <p>Unidad Educativa Santo Domingo de Guzmán - 2026</p>
+            <p><small>Pagina desarrollada por: David Méndez - Javier López - Juan Jerez</small></p>
+            <a href="https://github.com/crichopia/U.E_Sto_Domingo_Anuncios-gestion_biblioteca" target="_blank" rel="noopener noreferrer">
+                <i class="bi bi-github"></i>
+            </a>
         </footer>
-</body>
-</html>
