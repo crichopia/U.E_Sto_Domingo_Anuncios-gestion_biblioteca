@@ -13,7 +13,7 @@ $page = $page === false ? 1 : $page;
 $conditions = [];
 $queryParams = [];
 if ($searchTerm !== '') {
-    $conditions[] = 'title LIKE :title';
+    $conditions[] = 'title ILIKE :title';
     $queryParams[':title'] = '%' . $searchTerm . '%';
 }
 if ($yearFilter !== '') {
