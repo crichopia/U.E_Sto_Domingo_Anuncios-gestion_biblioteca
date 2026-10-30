@@ -49,12 +49,17 @@ body{
     display: none;
 }
 .subrayado {
-    text-decoration: underline;
-    scale: 1.1;
+    color:    #fff !important;
+    background-color: #009774;
+
 }
 
 .centerTheDamnButton{
     display:                             flex;
     place-items:                       center;
     justify-content:                   center;
+}
+.iconLink{
+    text-decoration: none;
+    color: #223944;
 }

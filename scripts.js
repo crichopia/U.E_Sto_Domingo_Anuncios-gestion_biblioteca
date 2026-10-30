@@ -85,6 +85,15 @@ function filtrarNoticias(){
     }
 
     const filtro = select.value;
+    const recomendaciones = document.querySelectorAll('#news_container .news_item[data-author]');
+
+    if (recomendaciones.length > 0) {
+        recomendaciones.forEach(recomendacion => {
+            recomendacion.style.display = filtro === '' || recomendacion.dataset.author === filtro ? '' : 'none';
+        });
+        return;
+    }
+
     const noticias = document.querySelectorAll('.news_item');
     
     noticias.forEach(noticia => {
@@ -97,31 +106,42 @@ function filtrarNoticias(){
 
 //* añadir libro al prestamo
 function prestarLibro(inputTitle, inputId, bookTitle, bookId){
-    const titleInput = document.getElementById(inputTitle);
-    const idInput = document.getElementById(inputId);
+    const formularios = document.querySelectorAll('.formularioPrestamos');
+    const camposLibro = Array.from(formularios, formulario => [
+        formulario.querySelector(`[id="${inputTitle}"]`),
+        formulario.querySelector(`[id="${inputId}"]`)
+    ]);
 
-    if (!titleInput || !idInput) {
+    if (camposLibro.length === 0 || camposLibro.some(([titleInput, idInput]) => !titleInput || !idInput)) {
         console.warn('No se encontraron los inputs para el título o el ID del libro');
         return;
     }
-    titleInput.value = bookTitle;
-    idInput.value = bookId;
+    camposLibro.forEach(([titleInput, idInput]) => {
+        titleInput.value = bookTitle;
+        idInput.value = bookId;
+    });
 }
 function eliminarLibroDelPrestamo(inputTitle, inputId){
-    const titleInput = document.getElementById(inputTitle);
-    const idInput = document.getElementById(inputId);
+    const formularios = document.querySelectorAll('.formularioPrestamos');
+    const camposLibro = Array.from(formularios, formulario => [
+        formulario.querySelector(`[id="${inputTitle}"]`),
+        formulario.querySelector(`[id="${inputId}"]`)
+    ]);
 
-    if (!titleInput || !idInput) {
+    if (camposLibro.length === 0 || camposLibro.some(([titleInput, idInput]) => !titleInput || !idInput)) {
         console.warn('No se encontraron los inputs para el título o el ID del libro');
         return;
     }
-    titleInput.value = '';
-    idInput.value = '';
+    camposLibro.forEach(([titleInput, idInput]) => {
+        titleInput.value = '';
+        idInput.value = '';
+    });
 }
 
-function cambiarSeccionPrestamo(idA, idB) {
+function cambiarSeccionPrestamo(idA, idB, idC) {
     const seccionA = document.getElementById(idA);
     const seccionB = document.getElementById(idB);
+    const seccionC = document.getElementById(idC);
 
     if (!seccionA || !seccionB) {
         console.warn('No se encontraron las secciones de préstamo');
@@ -130,19 +150,23 @@ function cambiarSeccionPrestamo(idA, idB) {
 
     seccionA.classList.remove('hidden');
     seccionB.classList.add('hidden');
+    seccionC.classList.add('hidden');
 }
 
-function cambiarSeccionSubrayada(idA, idB) {
+function cambiarSeccionSubrayada(idA, idB, idC) {
     const seccionA = document.getElementById(idA);
     const seccionB = document.getElementById(idB);
+    const seccionC = document.getElementById(idC);
 
     if (!seccionA || !seccionB) {
         console.warn('No se encontraron las secciones de préstamo');
         return;
     }
 
-    seccionA.classList.remove('subrayado');
-    seccionB.classList.add('subrayado');
+    seccionA.classList.add('subrayado');
+    seccionB.classList.remove('subrayado');
+    seccionC.classList.remove('subrayado');
+
 }
 
 //* gestionar visibilidad de formularios

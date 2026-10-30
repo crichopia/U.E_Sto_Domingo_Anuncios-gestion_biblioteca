@@ -236,7 +236,7 @@
                 <!-- <hr> -->
                 <label for="importance">Filtrar</label>
                 <select name="importance" id="importance" onchange="filtrarNoticias()">
-                    <option value="">n/a</option>
+                    <option value="">Todas</option>
                     <option value="normal">Normal</option>
                     <option value="importante" class="importante">Importante</option>
                     <option value="urgente" class="urgente">Urgente</option>
@@ -268,7 +268,15 @@
                                     <time><?php echo htmlspecialchars($row['announcement_date'], ENT_QUOTES, 'UTF-8'); ?></time>
                                     <span class="news_importance"><?php echo ucfirst(htmlspecialchars($importance, ENT_QUOTES, 'UTF-8')); ?></span>
                                 </div>
-                                <h4><?php echo htmlspecialchars($row['title'], ENT_QUOTES, 'UTF-8'); ?></h4>
+                                <div style="display: flex; width: 100%; align-items: center;">
+                                    <h4><?php echo htmlspecialchars($row['title'], ENT_QUOTES, 'UTF-8'); ?> </h4>
+                                    <?php if ((isset($_SESSION['username']) && $_SESSION['username'] === $row['author']) || (isset($_SESSION['role']) && $_SESSION['role'] === 'admin')) { ?>
+                                        <div style="margin-left: auto; display:flex; gap:20px;">
+                                            <a href="/controllers/crud_news.php?delId=<?php echo $row['id']; ?> "class="iconLink"><i class="fa-solid fa-trash"></i></a>
+                                            <a href="/controllers/crud_news.php?editId=<?php echo $row['id']; ?>"class="iconLink"><i class="fa-solid fa-edit"></i></a>
+                                        </div>
+                                    <?php } ?>
+                                </div>
                                 <p class="news_content"><?php echo htmlspecialchars($row['content'], ENT_QUOTES, 'UTF-8'); ?></p>
                             </div>
                         </article>

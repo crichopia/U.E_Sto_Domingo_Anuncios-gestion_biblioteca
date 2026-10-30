@@ -455,10 +455,7 @@ $paginationUrl = htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '
             margin: 10px 0;
             color: #223944;
         }
-    .iconLink{
-    text-decoration: none;
-    color: #223944;
-    }
+
 .icono-rotar {
     display: none;
     cursor:           pointer;
@@ -620,7 +617,6 @@ $paginationUrl = htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '
                 $isAvailable = (int) $row['num_copies'] > 0;
             ?>
                 <div class="controlled_book">
-                    <a href="/controllers/crud_books.php?delId=<?php echo (int) $row['id']; ?>" class="iconLink"><i class="fa-solid fa-trash"></i></a>
                     <div class="bookItem <?php echo $isAvailable ? 'disponible' : 'disponiblent'; ?>">
                         <div class="book-cover">
                             <img src="<?php echo htmlspecialchars($row['img_url'], ENT_QUOTES, 'UTF-8'); ?>" alt="Portada del libro <?php echo htmlspecialchars($row['title'], ENT_QUOTES, 'UTF-8'); ?>">
@@ -637,7 +633,10 @@ $paginationUrl = htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '
                                     <h3><strong>Materia:</strong> <?php echo htmlspecialchars($row['materia'], ENT_QUOTES, 'UTF-8'); ?></h3>
                                 <?php } ?>
                                 <h3><strong>Copias:</strong> <?php echo htmlspecialchars((string) $row['num_copies'], ENT_QUOTES, 'UTF-8'); ?></h3>
-                                <h3 class="book-status"><?php echo $isAvailable ? 'Disponible' : 'No disponible'; ?></h3>
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; place-items: center;">
+                                    <h3 class="book-status"><?php echo $isAvailable ? 'Disponible' : 'No disponible'; ?></h3>
+                                    <a href="/controllers/crud_books.php?delId=<?php echo (int) $row['id']; ?>" class="iconLink"><i class="fa-solid fa-trash"></i></a>
+                                </div>
                             </div>
                         </div>
                     </div>

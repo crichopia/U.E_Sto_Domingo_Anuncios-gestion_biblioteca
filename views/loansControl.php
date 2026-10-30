@@ -100,11 +100,11 @@ $paginationUrl = htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '
             overflow-y: scroll;
             -ms-overflow-style: none;
             scrollbar-width: none;
-
+            height: 100%;
             @media (max-width: 1154px) {
                 display: flex;
                 flex-direction:column;
-                height: auto;
+                height: 100%;
                 padding: 10px 15px;
                 padding-right: 15px;
 
@@ -115,13 +115,7 @@ $paginationUrl = htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '
             display: none;
         }
 
-        article h2 {
-            margin: 0;
-            color: #223944;
-            margin-bottom: 10px;
-        }
-
-        #formularioPrestamos {
+        .formularioPrestamos {
             background-color: #b5e0c8;
             border: 2px #8abfb7 solid;
             border-radius: 20px;
@@ -136,7 +130,6 @@ $paginationUrl = htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '
                 margin-bottom: 10px;
             }
         }
-
         #formContainer {
             display: flex;
             flex-direction: column;
@@ -144,7 +137,7 @@ $paginationUrl = htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '
             align-items: center;
         }
 
-        #formularioPrestamos h3 {
+        .formularioPrestamos h3 {
             margin: 0;
             color: #223944;
             margin-bottom: 2px;
@@ -155,7 +148,7 @@ $paginationUrl = htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '
             margin-bottom: 2px;
         }
 
-        #formularioPrestamos input {
+        .formularioPrestamos input {
             border: none;
             border-radius: 20px;
             margin-bottom: 2px;
@@ -193,13 +186,6 @@ $paginationUrl = htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '
             color: #fff;
 
         }
-        .controlarLibro:hover {
-            background-color: #009774;
-        }
-        .controlarLibro.hidden {
-            display: none;
-        }
-
         #books_container {
             display: flex;
             flex-direction: column;
@@ -237,13 +223,11 @@ $paginationUrl = htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '
             background-color: #fdc9c0;
         }
         .bookItem .book-cover {
-            flex: 0 0 110px;
-            height: 150px;
+            flex-basis: 78px;
+            height: 108px;
             border-radius: 10px;
             background-color: #fff;
             overflow: hidden;
-                flex-basis: 78px;
-                height: 108px;
 
         }
         .bookItem .book-cover img {
@@ -310,11 +294,9 @@ $paginationUrl = htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '
             border-radius: 25px;
             margin-bottom: 10px;
             padding: 10px 25px;
-            /* padding-right: 0px; */
             display: flex;
             flex-direction: column;
             gap: 5px;
-            /* align-items: center; */
             color: #223944;
         }
 
@@ -325,12 +307,21 @@ $paginationUrl = htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '
         .loanItem h4 {
             margin-top: 0;
             margin-bottom: 0;
-            /* margin-left: 10px; */
 
             @media (max-width: 900px) {
                 font-size: 15px;
-                margin-left: 0px;
             }
+        }
+
+        p.loanData {
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        p.loanData span {
+            margin-left: auto;
+            text-align: right;
         }
 
         .controlled_book {
@@ -385,42 +376,6 @@ $paginationUrl = htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '
             background-color: #658291;
             width:           100%;
             margin:          0px;
-            /* height: 1px; */
-        }
-    #modal_libros {
-        z-index:                        3;
-        position:                   fixed;
-        width:                       60vw;
-        max-width:                  600px;
-        top:                          50%;
-        left:                         50%;
-        transform:  translate(-50%, -50%);
-    }
-        #formulario_libros{
-            width:                      50vw;
-            max-height:                 70vh;
-            background:            #b5e0c8;
-            border:      2px #8abfb7 solid;
-            color:                 #000000;
-            padding:                      5%;
-            margin-top:                   5%;
-            margin-bottom:                5%;
-            border-radius:              20px;
-            display:                    flex;
-            flex-direction:           column;
-            justify-content:          center;
-            align-items:              center;
-            position:               absolute;
-            top:                         50%;
-            left:                        50%;
-            transform: translate(-50%, -50%);
-            box-sizing:           border-box;
-
-            @media (max-width: 600px) {
-                width:       80vw;
-                margin-top:    2%;
-                margin-bottom: 2%;
-            }
         }
         .centerTheDamnButton{
             display:                             flex;
@@ -432,17 +387,6 @@ $paginationUrl = htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '
                 margin-top:    2px;
             }
 
-        }
-        #cerrarModar{
-            background: none;
-            border: none;
-            cursor: pointer; 
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 30px; 
-            align-self: flex-end;
-            color: #223944;
         }
 .icono-rotar {
     display: none;
@@ -481,32 +425,58 @@ $paginationUrl = htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '
             overflow: hidden;
         }
 
+        .formDevolverWrapper {
+            display: grid;
+            grid-template-rows: minmax(0, 1fr);
+            opacity: 1;
+            transition: grid-template-rows 0.35s ease, opacity 0.35s ease;
+        }
+
+        .formDevolverWrapper.cerrado {
+            grid-template-rows: minmax(0, 0fr);
+            opacity: 0;
+        }
+
+        .formDevolverWrapper > form {
+            display: flex;
+            flex-direction: column;
+            min-height: 0;
+            overflow: hidden;
+            width: 100%;
+        }
+
         @media (prefers-reduced-motion: reduce) {
-            #bookFormWrapper {
+            #bookFormWrapper,
+            .formDevolverWrapper {
                 transition: none;
             }
         }
         #navPrestamos{
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1fr 1fr 1fr;
             place-items: center;
             padding: 5px 0px;
-            margin-bottom: 10px;
+            margin-bottom: 5px;
         }
         #navPrestamos a{
-            color: #223944;
-            align-self: center;
-            cursor: pointer;
+            color:          #223944;
+            display:      inline-flex;
+            align-self:        center;
+            justify-content:   center;
+            cursor:           pointer;
+            padding:          4px 5px;
+            border-radius:       20px;
+            transition: all 0.5s ease;
+            width: 70%;
             @media (max-width: 600px) {
             font-size:         16px;
-        }
+            }
             @media (max-width: 450px) {
             font-size:         14px;
-        }
+            }
 
         }
-        #pagination a,
-        #filters button{
+        #pagination a{
             border: none;
             border-radius: 20px;
             padding: 6px 12px;
@@ -541,44 +511,26 @@ $paginationUrl = htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '
                 font-size: 12px;
             }
         }
-        #search button:hover{
-            background-color: #009774;
-        }
-        #filters{
-            display:flex;
-            align-items: center;
-            justify-content: center;
-            flex-wrap: nowrap;
-            gap: 5px;
-            margin-bottom: 10px;
-            color: #223944;
-            @media (max-width: 800px) {
-                gap: 2px;
-                font-size: 14px;
-                flex-wrap: wrap;
+        #formpc{
+            @media (max-width: 1154px) {
+            display: none;
             }
-
         }
-        #filters select {
-            width: auto;
-            margin: 0;
-            padding: 5px 5px;
-        }
-        select{
-            text-align:          center;
-            margin-bottom:         10px;
-            background-color: #87cead;
-            border-radius:         20px;
-            padding:                5px;
-            border:                none;
-            color:               #fff;
-            cursor:pointer;
-
-            /* width:                  10%; */
-            /* font-weight:           bold; */
-            @media (max-width: 600px){
-                /* width: 57vw; */
+        #formcel{
+            display: none;
+            @media (max-width: 1154px) {
+            display: flex;
             }
+        }
+        #observaciones{
+            width: 80%;
+            margin-top: 5px;
+            align-self: center;
+            min-height: 150px;
+            border: none;
+            border-radius: 25px;
+            resize: none;
+            padding: 5px 20px;
         }
     </style>
     <article>
@@ -587,8 +539,7 @@ $paginationUrl = htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '
 
         <div id="newsControlContainer">
         <div id="formContainer">
-        <div id="bookFormWrapper">    
-        <form id="formularioPrestamos" action="../controllers/crud_loans.php" method="post">
+        <form id="formpc" class="formularioPrestamos" action="../controllers/crud_loans.php" method="post">
 
                 <h3>Nombre Estudiante:</h3>
                 <input type="text" name="nombreE" autofocus required=true placeholder="Nombre del Estudiante">
@@ -609,23 +560,44 @@ $paginationUrl = htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '
 
             </form>
         </div>
-            <i class="fa-solid fa-angle-up icono-rotar" onclick="rotarIcono(this); abrirFormulario('bookFormWrapper')"></i>
-        </div>
             <section id="books_container">
                 <nav id="navPrestamos">
-                    <a onclick="cambiarSeccionPrestamo('seccionLibros', 'seccionPrestamos');cambiarSeccionSubrayada('prestamosActivos', 'añadirLibro')" id="añadirLibro"  class="subrayado">Nuevo Préstamo</a>
-                    <a onclick="cambiarSeccionPrestamo('seccionPrestamos', 'seccionLibros');cambiarSeccionSubrayada('añadirLibro', 'prestamosActivos')" id="prestamosActivos" >Prestamos Activos</a>
+                    <a onclick="cambiarSeccionPrestamo('seccionLibros', 'seccionPrestamos', 'seccionHistorial');cambiarSeccionSubrayada('añadirLibro', 'prestamosActivos', 'historial')" id="añadirLibro"  class="subrayado">Préstar</a>
+                    <a onclick="cambiarSeccionPrestamo('seccionPrestamos', 'seccionLibros', 'seccionHistorial');cambiarSeccionSubrayada('prestamosActivos', 'añadirLibro', 'historial')" id="prestamosActivos" >Activos</a>
+                    <a onclick="cambiarSeccionPrestamo('seccionHistorial', 'seccionPrestamos', 'seccionLibros');cambiarSeccionSubrayada('historial', 'añadirLibro', 'prestamosActivos')" id="historial" >Historial</a>
                 </nav>
                 <div id="seccionLibros">
-        <form id="bookFilters" method="get" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8'); ?>">
-            <input type="hidden" name="page" value="1">
-            <div id="search">
-                <input type="text" id="searchInput" name="q" value="<?php echo htmlspecialchars($searchTerm, ENT_QUOTES, 'UTF-8'); ?>" placeholder="Buscar por Título">
-                <button style="padding: 8px;" type="submit" aria-label="Buscar"><i class="fa-solid fa-magnifying-glass"></i></button>
-            </div>
-
-        </form>
                     <section id="booksContainer">
+                        <div id="bookFormWrapper">    
+                            <form id="formcel" class="formularioPrestamos" action="../controllers/crud_loans.php" method="post">
+
+                                    <h3>Nombre Estudiante:</h3>
+                                    <input type="text" name="nombreE" autofocus required=true placeholder="Nombre del Estudiante">
+
+                                    <h3>Cedula</h3>
+                                    <input type="text" name="cedulaE" placeholder="Cedula">
+
+                                    <h3>Bibliotecario</h3>
+                                    <input type="text" name="bibliotecario" required=true placeholder="Bibliotecario" readonly value="<?php echo $_SESSION['username']; ?>">
+
+                                    <h3>Libro</h3>
+                                    <div style=" display: flex; gap: 5px; align-items: center;">
+                                    <input id="book_name" type="text" name="book_name" placeholder="Nombre del Libro" readonly required style=" width: 80%;">
+                                    <button id="boton_Eliminar" class="controlarLibro" type="button" onclick="eliminarLibroDelPrestamo('book_name', 'book_id'); cambiarBotonPrestamo('boton_Aniadir', 'boton_Eliminar');"><i class="fa-solid fa-minus"></i></button>
+                                    </div>
+                                    <input id="book_id" class="hidden" type="text" name="book_id" readonly >
+                                    <input id="botonSubmit" type="submit" name="save_loan" value="Registrar Prestamo" >
+
+                            </form>
+                        </div>
+                        <div class="centerTheDamnButton"><i class="fa-solid fa-angle-up icono-rotar" onclick="rotarIcono(this); abrirFormulario('bookFormWrapper')"></i></div>
+                        <form id="bookFilters" method="get" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8'); ?>">
+                            <input type="hidden" name="page" value="1">
+                            <div id="search">
+                                <input type="text" id="searchInput" name="q" value="<?php echo htmlspecialchars($searchTerm, ENT_QUOTES, 'UTF-8'); ?>" placeholder="Buscar por Título">
+                                <button style="padding: 8px;" type="submit" aria-label="Buscar"><i class="fa-solid fa-magnifying-glass"></i></button>
+                            </div>
+                        </form>
                         <?php
                             foreach ($books as $row) {
                                 $isAvailable = (int) $row['num_copies'] > 0;
@@ -640,7 +612,9 @@ $paginationUrl = htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '
                                     <h3><strong>Copias:</strong> <?php echo htmlspecialchars((string) $row['num_copies'], ENT_QUOTES, 'UTF-8'); ?></h3>
                                     <div style="display: grid;grid-template-columns: 1fr 1fr;place-items: center; width: 100%; margin-top: 8px;">
                                         <h3 class="book-status"><?php echo $isAvailable ? 'Disponible' : 'No disponible'; ?></h3>
-                                        <button class="controlarLibro" type="button" onclick="prestarLibro('book_name', 'book_id', '<?php echo($row['title']); ?>', <?php echo (int) $row['id']; ?>);"><i class="fa-solid fa-check"></i></button>
+                                        <?php if($isAvailable){ ?>
+                                            <button class="controlarLibro" type="button" onclick="prestarLibro('book_name', 'book_id', '<?php echo($row['title']); ?>', <?php echo (int) $row['id']; ?>);"><i class="fa-solid fa-check"></i></button>
+                                        <?php } ?>
                                     </div>
                                 </div>
                             </div>
@@ -662,7 +636,7 @@ $paginationUrl = htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '
                         <?php } ?>
                     </nav>                
                 </div>
-                
+
                 <div id="seccionPrestamos" class="hidden">
                     <?php
                             $query = "SELECT * FROM loans ORDER BY id DESC";
@@ -674,17 +648,71 @@ $paginationUrl = htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '
                                 <div style="display: flex; gap: 5px; align-items: baseline;">
                                     <h3 class="loanData"><?php echo $row['student_name']; ?> </span></h3>
                                     <h4><?php echo $row['loan_date']; ?></h4>
-                                    <a class="iconLink" href="/controllers/crud_loans.php?delId=<?php echo (int) $row['id']; ?>"><i class="fa-solid fa-trash"></i></a>
                                 </div>
                                 <hr>
                                 <div>
-                                    <h4 class="loanData">Cedula: <?php echo $row['cedula']; ?></h4>
-                                    <h4 class="loanData">Libro: <?php echo $row['book_name']; ?></h4>
-                                    <h4 class="loanData">Bibliotecario: <?php echo $row['bibliotecario']; ?></h4>
+                                    <p class="loanData"><strong>Cedula:</strong> <?php echo $row['cedula']; ?></p>
+                                    <p class="loanData"><strong>Libro:</strong> <?php echo $row['book_name']; ?></p>
+                                    <p class="loanData"><strong>Bibliotecario:</strong> <?php echo $row['bibliotecario']; ?></p>
+                                </div>
+                                <div class="centerTheDamnButton" style="margin: 0; gap: 10px;">
+                                    <label for="devolver_<?php echo (int) $row['id']; ?>"><strong>Devolver</strong></label>
+                                    <input id="devolver_<?php echo (int) $row['id']; ?>" type="checkbox" onchange="abrirFormulario('formDevolverWrapper_<?php echo (int) $row['id']; ?>')">
+                                </div>    
+                                <div id="formDevolverWrapper_<?php echo (int) $row['id']; ?>" class="formDevolverWrapper cerrado" aria-hidden="true" inert>
+                                    <form action="../controllers/crud_loans.php" method="post" id="formDevolver_<?php echo (int) $row['id']; ?>">
+                                        <div class="hidden">
+                                            <input type="text" name="nombreE"       readonly value="<?php echo $row['student_name']; ?>">
+                                            <input type="text" name="cedulaE"       readonly value="<?php echo $row['cedula']; ?>">
+                                            <input type="text" name="bibliotecario" readonly value="<?php echo $row['bibliotecario']; ?>">
+                                            <input type="text" name="book_name"     readonly value="<?php echo $row['book_name']; ?>">
+                                            <input type="text" name="book_id"       readonly value="<?php echo $row['book_id']; ?>">
+                                            <input type="text" name="loan_id"       readonly value="<?php echo (int) $row['id']; ?>">
+                                            <input type="text" name="loan_date"     readonly value="<?php echo $row['loan_date']; ?>">
+                                        </div>
+                                        <label for="observation"><strong>Observaciones</strong></label>
+                                        <textarea name="observation" id="observaciones" ></textarea>
+                                        <input id="botonSubmit" type="submit" name="end_loan" value="Devolver Libro" style="width: min-content; padding: 5px 10px; border:none;border-radius: 20px; align-self: center;" >
+                                    </form>
                                 </div>
                             </div>
                         </div>
                     <?php } ?>
+                </div>
+
+                <div id="seccionHistorial" class="hidden">
+                    <?php
+                            $query = "SELECT * FROM ended_loans ORDER BY id DESC";
+                            $result_tasks = $conn->query($query);
+
+                            while ($row = $result_tasks->fetch(PDO::FETCH_ASSOC)) {?>
+                        <div class="controlled_book">
+                            <div class="loanItem" >
+                                <div style="display: flex; gap: 5px; align-items: baseline;">
+                                    <h3 class="loanData"><?php echo htmlspecialchars((string) $row['student_name'], ENT_QUOTES, 'UTF-8'); ?></h3>
+                                </div>
+                                <hr>
+                                <div>
+                                    <p class="loanData"><strong>Salida:</strong><span><?php echo htmlspecialchars((string) $row['loan_start'], ENT_QUOTES, 'UTF-8'); ?></span></p>
+                                    <p class="loanData"><strong>Devolución:</strong><span><?php echo htmlspecialchars((string) $row['loan_end'], ENT_QUOTES, 'UTF-8'); ?></span></p>
+                                    <p class="loanData"><strong>Cédula:</strong><span><?php echo htmlspecialchars((string) $row['cedula'], ENT_QUOTES, 'UTF-8'); ?></span></p>
+                                    <p class="loanData"><strong>Libro:</strong><span><?php echo htmlspecialchars((string) $row['book_name'], ENT_QUOTES, 'UTF-8'); ?></span></p>
+                                    <p class="loanData"><strong>Bibliotecario:</strong><span><?php echo htmlspecialchars((string) $row['bibliotecario'], ENT_QUOTES, 'UTF-8'); ?></span></p>
+                                    <p class="loanData"><strong>Observación:</strong></p>
+                                    <p style="text-align: justify;">
+                                        <?php 
+                                            if ($row['observation']){
+                                                echo htmlspecialchars((string) $row['observation'], ENT_QUOTES, 'UTF-8'); 
+                                            }else{
+                                                echo("Sin observaciones");
+                                            }
+                                        ?>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    <?php } ?>
+
                 </div>
                 </section>
             </div>

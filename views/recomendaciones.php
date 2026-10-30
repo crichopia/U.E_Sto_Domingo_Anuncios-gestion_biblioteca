@@ -46,7 +46,7 @@
             padding:           10px 30px;
             @media (max-width: 600px){
                 width: 90%;
-                padding: 10px 15px;
+                padding: 10px 10px;
                 
             }
         }
@@ -134,9 +134,9 @@
             border-radius:                25px;
             margin-bottom:                10px;
             padding:                 10px 20px;
-            width: 80%;
+            width:                         80%;
             @media (max-width: 600px){
-                width: 70%;
+                width: 85%;
             }
         }
 
@@ -163,6 +163,52 @@
             @media (max-width: 600px){
                 font-size: 16px;
             }
+        }
+        .recommendation_list{
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        .recommendation_item{
+            display: flex;
+            align-items: center;
+            width: 100%;
+            gap: 12px;
+        }
+        .recommendation_item + .recommendation_item{
+            padding-top: 12px;
+            border-top: 1px solid #8abfb7;
+        }
+        .recommendation_details{
+            flex: 1 1 auto;
+            width: 100%;
+            min-width: 0;
+        }
+        .recommendation_row{
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) auto;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+        }
+        .recommendation_description{
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            min-width: 0;
+        }
+        .recommendation_description h4{
+            min-width: 0;
+        }
+        .recommendation_item .url{
+            max-width: 100%;
+        }
+        .recommendation_delete{
+            flex: 0 0 auto;
         }
         #addRecomendation {
             padding:    5px 8px;
@@ -252,18 +298,15 @@
         <div id="news_box">
             <div style="display:flex; justify-content:center; gap:5px;">
                 <select name="importance" id="importance" onchange="filtrarNoticias()">
-                    <option value="">n/a</option>
+                    <option value="">Filtrar</option>
             
                 <?php
-                    $query = "SELECT * FROM user_data ";
+                    $query = "SELECT username FROM user_data ";
                     $result_tasks = $conn->query($query);
                     while ($row = $result_tasks->fetch(PDO::FETCH_ASSOC)) {?>
 
-                        <option value="<?php 
-                        $autor = $row['username'];
-                        $sin_espacios = str_replace(' ', '', $autor);
-                        echo($sin_espacios);?>">
-                            <?php echo($row['username']);?>
+                        <option value="<?php echo htmlspecialchars($row['username'], ENT_QUOTES, 'UTF-8'); ?>">
+                            <?php echo htmlspecialchars($row['username'], ENT_QUOTES, 'UTF-8'); ?>
                         </option>
                     <?php } ?>
                 </select>
@@ -273,31 +316,34 @@
             </div>
             <section id="news_container">
                 <?php
-                    $query = "SELECT * FROM recomendations ORDER BY autor DESC";
+                    $query = "SELECT * FROM recomendations ORDER BY autor ASC, id DESC";
                     $result_tasks = $conn->query($query);
+                    $recommendationsByAuthor = [];
+                    while ($row = $result_tasks->fetch(PDO::FETCH_ASSOC)) {
+                        $recommendationsByAuthor[$row['autor']][] = $row;
+                    }
 
-                    while ($row = $result_tasks->fetch(PDO::FETCH_ASSOC)) {?>
-                        <div style="display: flex; align-items: center; justify-content: center; width: 100%; gap: 10px;">
-                        
-                            <?php if (isset($_SESSION['username'])) { ?>
-                            <?php if (($_SESSION['username'] === $row['autor'] || $_SESSION['role'] === 'admin')){?>
-                            <div class="controlled_new">
-                                <a href="/controllers/crud_recomendations.php?delId=<?php echo $row['id']; ?>" class="iconLink"><i class="fa-solid fa-trash"></i></a>
-                            </div>
-                            <?php } ?>
-                            <?php } ?>
-                            <div class="news_item <?php
-                        $autor = $row['autor'];
-                        $sin_espacios = str_replace(' ', '', $autor);
-                        echo ($sin_espacios); ?>">
-
-                        <div style="display:flex; gap:20px;">
-                            <h3 class="new_title" id="title_new-1">Recomendacion de: <?php echo ucwords($row['autor']); ?></h3>
-                        </div>
-                        <hr>
-                        <h4><?php echo $row['descripcion']; ?></h4>
-                        <a href="<?php echo $row['url_recomendacion']; ?>" class="url" target="_blank"><?php echo $row['url_recomendacion']; ?></a>
-                        </div>
+                    foreach ($recommendationsByAuthor as $author => $recommendations) { ?>
+                        <div class="news_item" data-author="<?php echo htmlspecialchars($author, ENT_QUOTES, 'UTF-8'); ?>">
+                            <h3 class="new_title">Recomendaciones de: <?php echo htmlspecialchars(ucwords($author), ENT_QUOTES, 'UTF-8'); ?></h3>
+                            <hr>
+                            <ul class="recommendation_list">
+                                <?php foreach ($recommendations as $recommendation) { ?>
+                                    <li class="recommendation_item">
+                                        <div class="recommendation_details">
+                                            <div class="recommendation_row">
+                                                <div class="recommendation_description">
+                                                    <?php if (isset($_SESSION['username']) && ($_SESSION['username'] === $author || (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'))) { ?>
+                                                        <a href="/controllers/crud_recomendations.php?delId=<?php echo urlencode($recommendation['id']); ?>" class="iconLink recommendation_delete" aria-label="Eliminar recomendación"><i class="fa-solid fa-trash"></i></a>
+                                                    <?php } ?>
+                                                    <p><?php echo htmlspecialchars(ucfirst($recommendation['descripcion']), ENT_QUOTES, 'UTF-8'); ?></p>
+                                                </div>
+                                                <a title="visitar" href="<?php echo htmlspecialchars($recommendation['url_recomendacion'], ENT_QUOTES, 'UTF-8'); ?>" class="url" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-arrow-up-right-from-square"></i> </a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                <?php } ?>
+                            </ul>
                         </div>
                     <?php } ?>
             </section>

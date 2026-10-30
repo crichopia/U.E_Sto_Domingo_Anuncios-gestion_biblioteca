@@ -51,8 +51,10 @@ if (isset($_POST['save_loan'])) {
     exit;
 }
 
-if (isset($_GET['delId'])) {
-    $loanId = filter_var($_GET['delId'], FILTER_VALIDATE_INT, ['options' => ['min_range' => 1]]);
+if (isset($_POST['end_loan']) || isset($_GET['delId'])) {
+    $isEndingLoan = isset($_POST['end_loan']);
+    $loanIdInput = $isEndingLoan ? ($_POST['loan_id'] ?? null) : $_GET['delId'];
+    $loanId = filter_var($loanIdInput, FILTER_VALIDATE_INT, ['options' => ['min_range' => 1]]);
     if ($loanId === false || $loanId === null) {
         http_response_code(400);
         exit('Identificador de préstamo no válido.');
@@ -61,11 +63,14 @@ if (isset($_GET['delId'])) {
     try {
         $conn->beginTransaction();
 
-        $findLoan = $conn->prepare('SELECT book_id FROM loans WHERE id = ? FOR UPDATE');
+        $findLoan = $conn->prepare(
+            'SELECT student_name, cedula, bibliotecario, book_id, book_name, loan_date
+            FROM loans WHERE id = ? FOR UPDATE'
+        );
         $findLoan->execute([$loanId]);
-        $bookId = $findLoan->fetchColumn();
+        $loan = $findLoan->fetch();
 
-        if ($bookId === false) {
+        if ($loan === false) {
             $conn->rollBack();
             http_response_code(404);
             exit('No se encontró el préstamo.');
@@ -77,9 +82,24 @@ if (isset($_GET['delId'])) {
         }
 
         $restoreCopy = $conn->prepare('UPDATE books SET num_copies = num_copies + 1 WHERE id = ?');
-        if (!$restoreCopy->execute([$bookId]) || $restoreCopy->rowCount() !== 1) {
+        if (!$restoreCopy->execute([$loan['book_id']]) || $restoreCopy->rowCount() !== 1) {
             throw new RuntimeException('No se pudo devolver la copia al inventario.');
         }
+
+        $insertEndedLoan = $conn->prepare(
+            'INSERT INTO ended_loans
+                (loan_start, student_name, cedula, bibliotecario, book_id, book_name, observation)
+            VALUES (?, ?, ?, ?, ?, ?, ?)'
+        );
+        $insertEndedLoan->execute([
+            $loan['loan_date'],
+            $loan['student_name'],
+            $loan['cedula'],
+            $loan['bibliotecario'],
+            $loan['book_id'],
+            $loan['book_name'],
+            trim((string) ($_POST['observation'] ?? '')),
+        ]);
 
         $conn->commit();
     } catch (Throwable $error) {
@@ -87,7 +107,7 @@ if (isset($_GET['delId'])) {
             $conn->rollBack();
         }
         http_response_code(500);
-        exit('Ocurrió un error al eliminar el préstamo.');
+        exit('Ocurrió un error al devolver el préstamo.');
     }
 
     header('Location: ../adminDashboards/loansDashboard.php');

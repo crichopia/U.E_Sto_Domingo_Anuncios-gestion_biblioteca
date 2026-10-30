@@ -220,13 +220,13 @@
                 <div class="navLinks">
                     <a href="/dashboards/newsDashboard.php">Noticias</a>
                     <a href="/dashboards/bibliotecaDashboard.php">Biblioteca</a>
-                    <a href="/dashboards/recomenacionesDashboard.php">Páginas Recomendadas</a>
+                    <a href="/dashboards/recomenacionesDashboard.php">Recomendaciones</a>
                     <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin' || isset($_SESSION['role']) && $_SESSION['role'] === 'bibliotecario') { ?>
-                    <a href="/adminDashboards/loansDashboard.php">Libros Prestados</a>
+                    <a href="/adminDashboards/loansDashboard.php">Prestamos</a>
                     <?php } ?>
 
                     <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin') { ?>
-                    <a href="/adminDashboards/registerDashboard.php">Gestionar Usuarios</a>
+                    <a href="/adminDashboards/registerDashboard.php">Usuarios</a>
                     <?php } ?>
                 </div>
             </div>

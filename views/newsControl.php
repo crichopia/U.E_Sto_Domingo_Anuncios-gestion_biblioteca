@@ -255,11 +255,6 @@
             grid-template-rows: 1fr 1fr;
             place-items: center;
         }
-        .iconLink{
-            text-decoration: none;
-            color: #223944;
-
-        }
 
         .icono-rotar {
             display: none;
