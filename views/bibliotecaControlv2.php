@@ -521,7 +521,7 @@ $paginationUrl = htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '
                     <div>
                         <label for="año">Año:</label>
                         <select name="año" id="año">
-                            <option value="n/a">Ninguno</option>
+                            <option value="ninguno">Ninguno</option>
                             <option value="1er grado">1er Grado</option>
                             <option value="2do grado">2do Grado</option>
                             <option value="3er grado">3er Grado</option>
@@ -539,7 +539,7 @@ $paginationUrl = htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '
                     <div>
                         <label for="materia">Materia:</label>
                         <select name="materia" id="materia">
-                            <option value="n/a">n/a</option>
+                            <option value="ninguna">Ninguna</option>
                             <option value="matematicas">Matematicas</option>
                             <option value="biologia">Biologia</option>
                             <option value="quimica">Quimica</option>
@@ -578,7 +578,6 @@ $paginationUrl = htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '
                     <label for="year">Año:</label>
                     <select name="año" id="year">
                         <option value="">Todos</option>
-                        <option value="n/a" <?php echo $yearFilter === 'n/a' ? 'selected' : ''; ?>>n/a</option>
                         <option value="ninguno" <?php echo $yearFilter === 'ninguno' ? 'selected' : ''; ?>>ninguno</option>
                         <option value="1er grado" <?php echo $yearFilter === '1er grado' ? 'selected' : ''; ?>>1er Grado</option>
                         <option value="2do grado" <?php echo $yearFilter === '2do grado' ? 'selected' : ''; ?>>2do Grado</option>
@@ -597,7 +596,6 @@ $paginationUrl = htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '
                     <label for="subject">Materia:</label>
                     <select name="materia" id="subject" style="max-width: 95px; text-overflow: ellipsis;">
                         <option value="">Todos</option>
-                        <option value="n/a" <?php echo $subjectFilter === 'n/a' ? 'selected' : ''; ?>>n/a</option>
                         <option value="ninguna" <?php echo $subjectFilter === 'ninguna' ? 'selected' : ''; ?>>Ninguna</option>
                         <option value="matematicas" <?php echo $subjectFilter === 'matematicas' ? 'selected' : ''; ?>>Matematicas</option>
                         <option value="biologia" <?php echo $subjectFilter === 'biologia' ? 'selected' : ''; ?>>Biologia</option>
