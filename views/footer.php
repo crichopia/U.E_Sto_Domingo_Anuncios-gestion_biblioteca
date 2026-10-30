@@ -59,7 +59,7 @@
         <footer>
             <p>© 2026 U.E. Santo Domingo de Guzmán. Todos los derechos reservados.</p>
             <p><small>Pagina desarrollada por: UPTTMBI</small></p>
-            <p><small>Programadores:- David Méndez - Javier López - Juan Jerez</small></p>
+            <p><small>Programadores:<span style="display: flex;flex-wrap: nowrap;"> David Méndez - Javier López - Juan Jerez</span></small></p>
             
             <div id="redes">
                 <a href="https://github.com/crichopia/U.E_Sto_Domingo_Anuncios-gestion_biblioteca" target="_blank" rel="noopener noreferrer">
