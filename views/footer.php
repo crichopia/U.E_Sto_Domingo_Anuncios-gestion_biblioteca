@@ -36,6 +36,9 @@
         .footLinks{
             display:    flex;
             font-size:  16px ;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 5px;
             @media (max-width: 600px){
                 font-size:  12px ;
             }
@@ -46,7 +49,6 @@
             display:                flex;
             justify-content:       center;
             align-items:           center;
-            padding:                 2px 5px;
             box-sizing:         border-box;
             transition:     all 0.3s ease;
 
