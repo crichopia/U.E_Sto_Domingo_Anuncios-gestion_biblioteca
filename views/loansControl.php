@@ -293,7 +293,7 @@ $paginationUrl = htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '
             background-color: #b3e7d7;
             border-radius: 25px;
             margin-bottom: 10px;
-            padding: 10px 25px;
+            padding: 10px 8px;
             display: flex;
             flex-direction: column;
             gap: 5px;
